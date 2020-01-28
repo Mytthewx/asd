@@ -2,7 +2,7 @@ package com.company;
 
 public class Queue {
     Person last;
-    
+
     public Person removeFirst() {
         Person walking = last;
         System.out.println(walking);
@@ -11,17 +11,14 @@ public class Queue {
             System.out.println(walking);
         } while (walking.getPrev() != null);
         System.out.println("Last person in queue is: " + walking);
+        Person flag = walking;
         walking = null;
-        return walking;
+        return flag;
     }
 
     public void add(Person person) {
         person.setPrev(last);
         last = person;
-    }
-
-    public void clear() {
-        System.out.println(last);
     }
 
     public int size() {
@@ -37,11 +34,8 @@ public class Queue {
         return counter;
     }
 
-    @Override
-    public String toString() {
-        return "Queue{" +
-                "person=" + last +
-                '}';
+    public void clear() {
+        last = null;
     }
 }
 

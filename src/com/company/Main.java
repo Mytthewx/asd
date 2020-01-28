@@ -18,7 +18,6 @@ public class Main {
         queue.add(person6);
         System.out.println("Size of queue = " + queue.size());
         queue.clear();
-        queue.removeFirst();
         //System.out.println(queue);
         //System.out.println(queue.sizeOf());
         //queue.clear();
