@@ -10,12 +10,18 @@ public class Main {
         Person person4 = new Person("Krystian");
         Person person5 = new Person("Wojciech");
         Person person6 = new Person("Błażej");
-        queue.addHumanToQueue(person1);
-        queue.addHumanToQueue(person2);
-        queue.addHumanToQueue(person3);
-        queue.addHumanToQueue(person4);
-        queue.addHumanToQueue(person5);
-        queue.addHumanToQueue(person6);
-        System.out.println(person6);
+        queue.add(person1);
+        queue.add(person2);
+        queue.add(person3);
+        queue.add(person4);
+        queue.add(person5);
+        queue.add(person6);
+        System.out.println("Size of queue = " + queue.size());
+        queue.clear();
+        queue.removeFirst();
+        //System.out.println(queue);
+        //System.out.println(queue.sizeOf());
+        //queue.clear();
+        //System.out.println(queue);
     }
 }
