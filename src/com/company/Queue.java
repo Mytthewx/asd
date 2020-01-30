@@ -11,7 +11,9 @@ public class Queue {
 
     public Person removeFirst() {
         Person walking = last;
-        do walking = walking.getPrev(); while (walking.getPrev() != null);
+        do {
+            walking = walking.getPrev();
+        } while (walking.getPrev() != null);
         Person flag = walking;
         walking = null;
         return flag;
@@ -24,7 +26,9 @@ public class Queue {
 
     public int size() {
         Person walking = last;
-        if (walking == null) return 0;
+        if (walking == null) {
+            return 0;
+        }
         int counter = 0;
         do {
             walking = walking.getPrev();
@@ -48,23 +52,20 @@ public class Queue {
         if (size() != queue.size()) {
             return false;
         }
-        Person walking = getLast();
-        Person walking2 = queue.getLast();
-//        do {
-//            if (!walking.equals(walking2)) {
-//                return false;
-//            }
-//            walking = walking.getPrev();
-//            walking2 = walking2.getPrev();
-//        } while (walking != null);
-
-        while (walking == null) {
-            if (!Objects.equals(walking, walking2)) {
-                return false;
-            }
-            walking = walking.getPrev();
-            walking2 = walking2.getPrev();
+        Person walking = last;
+        Person walking2 = queue.last;
+        if (walking.equals(walking2)) {
+            do {
+                if (walking != walking2) {
+                    return false;
+                }
+                walking = walking.getPrev();
+                System.out.println("walking = " + walking);
+                walking2 = walking2.getPrev();
+                System.out.println("walking2 = " + walking2);
+            } while (walking != null);
         }
+        return true;
     }
 
     @Override
