@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Person {
     private String name;
-    private Person prev;
 
     public Person(String name) {
         this.name = name;
@@ -14,13 +13,6 @@ public class Person {
         return name;
     }
 
-    public Person getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Person prev) {
-        this.prev = prev;
-    }
 
     @Override
     public boolean equals(Object o) {

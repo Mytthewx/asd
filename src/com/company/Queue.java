@@ -2,18 +2,41 @@ package com.company;
 
 import java.util.Objects;
 
-public class Queue {
-    private Person last;
+class Node {
+    private Node prev;
+    private Person person;
 
-    public Person getLast() {
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Node getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Node prev) {
+        this.prev = prev;
+    }
+}
+
+public class Queue {
+    private Node last;
+
+    public Node getLast() {
         return last;
     }
 
     public Person removeFirst() {
-        Person walking = last;
-        do walking = walking.getPrev(); while (walking.getPrev() != null);
-        Person flag = walking;
-        walking = null;
+        Node walking = last;
+        do {
+            walking = walking.getPrev();
+        } while (walking.getPrev().getPrev() != null);
+        Person flag = walking.getPrev().getPerson();
+        walking.getPrev().setPrev(null);
         return flag;
     }
 
@@ -24,7 +47,9 @@ public class Queue {
 
     public int size() {
         Person walking = last;
-        if (walking == null) return 0;
+        if (walking == null) {
+            return 0;
+        }
         int counter = 0;
         do {
             walking = walking.getPrev();
@@ -48,24 +73,23 @@ public class Queue {
         if (size() != queue.size()) {
             return false;
         }
-        Person walking = getLast();
-        Person walking2 = queue.getLast();
-//        do {
-//            if (!walking.equals(walking2)) {
-//                return false;
-//            }
-//            walking = walking.getPrev();
-//            walking2 = walking2.getPrev();
-//        } while (walking != null);
-
-        while (walking == null) {
-            if (!Objects.equals(walking, walking2)) {
-                return false;
-            }
-            walking = walking.getPrev();
-            walking2 = walking2.getPrev();
+        Person walking = last;
+        Person walking2 = queue.last;
+        if (walking.equals(walking2)) {
+            do {
+                System.out.println("walking = " + walking);
+                System.out.println("walking2 = " + walking2);
+                if (walking != walking2) {
+                    return false;
+                }
+                walking = walking.getPrev();
+                walking2 = walking2.getPrev();
+            } while (walking != null);
+            return true;
         }
+        return false;
     }
+
 
     @Override
     public int hashCode() {
