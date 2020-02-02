@@ -2,28 +2,28 @@ package com.company;
 
 import java.util.Objects;
 
-class Node {
-    private Node prev;
-    private Person person;
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public Node getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Node prev) {
-        this.prev = prev;
-    }
-}
-
 public class Queue {
+    private class Node {
+        private Node prev;
+        private Person person;
+
+        public Person getPerson() {
+            return person;
+        }
+
+        public void setPerson(Person person) {
+            this.person = person;
+        }
+
+        public Node getPrev() {
+            return prev;
+        }
+
+        public void setPrev(Node prev) {
+            this.prev = prev;
+        }
+    }
+
     private Node last;
 
     public Node getLast() {
@@ -40,10 +40,13 @@ public class Queue {
         return flag;
     }
 
-    public void add(Person person) {
+    public void add(Node person) {
         person.setPrev(last);
         last = person;
     }
+
+
+    //Wszystko na dole do poprawy. gora ok
 
     public int size() {
         Person walking = last;
