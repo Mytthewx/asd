@@ -15,8 +15,8 @@ public class Main {
         queue1.add(person1);
         queue1.add(person2);
         queue1.add(person3);
-        System.out.println("The queue consists of " + queue.size() + " people.");
+        System.out.println("The queue consists of " + queue1.size() + " people.");
         //System.out.println(person1.equals(person3));
-        System.out.println(queue.equals(queue1));
+        //System.out.println(queue.equals(queue1));
     }
 }

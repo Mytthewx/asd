@@ -50,11 +50,8 @@ public class Queue {
         last = node;
     }
 
-
-    //Wszystko na dole do poprawy. gora ok
-
     public int size() {
-        Person walking = last;
+        Node walking = last;
         if (walking == null) {
             return 0;
         }
@@ -66,37 +63,38 @@ public class Queue {
         return counter;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (last == null) {
-            return false;
-        }
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Queue queue = (Queue) o;
-        if (size() != queue.size()) {
-            return false;
-        }
-        Person walking = last;
-        Person walking2 = queue.last;
-        if (walking.equals(walking2)) {
-            do {
-                System.out.println("walking = " + walking);
-                System.out.println("walking2 = " + walking2);
-                if (walking != walking2) {
-                    return false;
-                }
-                walking = walking.getPrev();
-                walking2 = walking2.getPrev();
-            } while (walking != null);
-            return true;
-        }
-        return false;
-    }
+    //Do poprawy metoda 'equals'
+//    @Override
+//    public boolean equals(Object o) {
+//        if (last == null) {
+//            return false;
+//        }
+//        if (this == o) {
+//            return true;
+//        }
+//        if (o == null || getClass() != o.getClass()) {
+//            return false;
+//        }
+//        Queue queue = (Queue) o;
+//        if (size() != queue.size()) {
+//            return false;
+//        }
+//        Person walking = last;
+//        Person walking2 = queue.last;
+//        if (walking.equals(walking2)) {
+//            do {
+//                System.out.println("walking = " + walking);
+//                System.out.println("walking2 = " + walking2);
+//                if (walking != walking2) {
+//                    return false;
+//                }
+//                walking = walking.getPrev();
+//                walking2 = walking2.getPrev();
+//            } while (walking != null);
+//            return true;
+//        }
+//        return false;
+//    }
 
 
     @Override
