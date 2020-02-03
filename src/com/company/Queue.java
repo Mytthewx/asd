@@ -7,6 +7,10 @@ public class Queue {
         private Node prev;
         private Person person;
 
+        public Node(Person person) {
+            this.person = person;
+        }
+
         public Person getPerson() {
             return person;
         }
@@ -40,9 +44,10 @@ public class Queue {
         return flag;
     }
 
-    public void add(Node person) {
-        person.setPrev(last);
-        last = person;
+    public void add(Person person) {
+        Node node = new Node(person);
+        node.setPrev(last);
+        last = node;
     }
 
 
