@@ -26,6 +26,14 @@ public class Queue {
         public void setPrev(Node prev) {
             this.prev = prev;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "prev=" + prev +
+                    ", person=" + person +
+                    '}';
+        }
     }
 
     private Node last;
@@ -64,37 +72,33 @@ public class Queue {
     }
 
     //Do poprawy metoda 'equals'
-//    @Override
-//    public boolean equals(Object o) {
-//        if (last == null) {
-//            return false;
-//        }
-//        if (this == o) {
-//            return true;
-//        }
-//        if (o == null || getClass() != o.getClass()) {
-//            return false;
-//        }
-//        Queue queue = (Queue) o;
-//        if (size() != queue.size()) {
-//            return false;
-//        }
-//        Person walking = last;
-//        Person walking2 = queue.last;
-//        if (walking.equals(walking2)) {
-//            do {
-//                System.out.println("walking = " + walking);
-//                System.out.println("walking2 = " + walking2);
-//                if (walking != walking2) {
-//                    return false;
-//                }
-//                walking = walking.getPrev();
-//                walking2 = walking2.getPrev();
-//            } while (walking != null);
-//            return true;
-//        }
-//        return false;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        Queue queue = (Queue) o;
+        if (size() != queue.size()) {
+            return false;
+        }
+        Node walking = last;
+        Node walking2 = queue.last;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (walking.getPerson() == walking2.getPerson()) {
+            do {
+                System.out.println("Walking = " + walking.getPerson());
+                System.out.println("Walking2 = " + walking2.getPerson());
+                if (walking.getPerson() != walking2.getPerson()) {
+                    return false;
+                }
+                walking = walking.getPrev();
+                walking2 = walking2.getPrev();
+            } while (walking != null);
+        }
+        return true;
+    }
 
 
     @Override

@@ -12,11 +12,13 @@ public class Main {
         queue.add(person1);
         queue.add(person2);
         queue.add(person3);
+        queue.add(person4);
         queue1.add(person1);
         queue1.add(person2);
         queue1.add(person3);
+        queue1.add(person4);
         System.out.println("The queue consists of " + queue1.size() + " people.");
-        //System.out.println(person1.equals(person3));
-        //System.out.println(queue.equals(queue1));
+        //System.out.println(person1.equals(person2));
+        System.out.println(queue.equals(queue1));
     }
 }
