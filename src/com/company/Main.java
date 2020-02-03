@@ -20,5 +20,6 @@ public class Main {
         System.out.println("The queue consists of " + queue1.size() + " people.");
         //System.out.println(person1.equals(person2));
         System.out.println(queue.equals(queue1));
+        System.out.println(new Queue().equals(3));
     }
 }

@@ -74,18 +74,18 @@ public class Queue {
     //Do poprawy metoda 'equals'
     @Override
     public boolean equals(Object o) {
-        Queue queue = (Queue) o;
-        if (size() != queue.size()) {
-            return false;
-        }
-        Node walking = last;
-        Node walking2 = queue.last;
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        Queue queue = (Queue) o;
+        if (size() != queue.size()) {
+            return false;
+        }
+        Node walking = last;
+        Node walking2 = queue.last;
         if (walking.getPerson() == walking2.getPerson()) {
             do {
                 System.out.println("Walking = " + walking.getPerson());
