@@ -15,10 +15,6 @@ public class Queue {
             return person;
         }
 
-        public void setPerson(Person person) {
-            this.person = person;
-        }
-
         public Node getPrev() {
             return prev;
         }
@@ -102,11 +98,12 @@ public class Queue {
     public boolean contains(Person person) {
         Node walking = last;
         do {
-            if (walking.getPerson().equals(person)) {
+            if (walking.getPerson() == person) {
                 return true;
             }
+            System.out.println(walking.getPerson());
             walking = walking.getPrev();
-        } while (walking.getPrev().getPerson() != null);
+        } while (walking != null);
         return false;
     }
 
@@ -117,6 +114,13 @@ public class Queue {
 
     public void clear() {
         last = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Queue{" +
+                "last=" + last +
+                '}';
     }
 }
 
