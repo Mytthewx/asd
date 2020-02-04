@@ -71,7 +71,6 @@ public class Queue {
         return counter;
     }
 
-    //Do poprawy metoda 'equals'
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,6 +99,16 @@ public class Queue {
         return true;
     }
 
+    public boolean contains(Person person) {
+        Node walking = last;
+        do {
+            if (walking.getPerson().equals(person)) {
+                return true;
+            }
+            walking = walking.getPrev();
+        } while (walking.getPrev().getPerson() != null);
+        return false;
+    }
 
     @Override
     public int hashCode() {
