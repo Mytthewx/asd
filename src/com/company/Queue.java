@@ -77,7 +77,7 @@ public class Queue {
         }
         Node walking = last;
         Node walking2 = queue.last;
-        if (walking.getPerson() == walking2.getPerson()) {
+        if (walking.getPerson().equals(walking2.getPerson())) {
             do {
                 if (walking.getPerson() != walking2.getPerson()) {
                     return false;
@@ -108,7 +108,6 @@ public class Queue {
             if (walking.getPerson() == person) {
                 return true;
             }
-            System.out.println(walking.getPerson());
             walking = walking.getPrev();
         } while (walking != null);
         return false;
@@ -128,6 +127,3 @@ public class Queue {
         return s.toString();
     }
 }
-
-
-
