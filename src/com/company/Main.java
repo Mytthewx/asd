@@ -14,8 +14,9 @@ public class Main {
         queue.add(person3);
         queue.add(person4);
         queue1.add(person1);
-        queue1.add(person2);
         queue1.add(person3);
-        queue1.add(person4);
+        System.out.println(queue.hashCode());
+        System.out.println(queue1.hashCode());
+        System.out.println(queue);
     }
 }

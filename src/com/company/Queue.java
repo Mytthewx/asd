@@ -1,9 +1,9 @@
 package com.company;
 
-import java.util.Objects;
-
 public class Queue {
-    private class Node {
+    private Node last;
+
+    private static class Node {
         private Node prev;
         private Person person;
 
@@ -24,18 +24,14 @@ public class Queue {
         }
 
         @Override
-        public String toString() {
-            return "Node{" +
-                    "prev=" + prev +
-                    ", person=" + person +
-                    '}';
+        public int hashCode() {
+            return person.hashCode();
         }
-    }
 
-    private Node last;
-
-    public Node getLast() {
-        return last;
+        @Override
+        public String toString() {
+            return String.valueOf(person);
+        }
     }
 
     public Person removeFirst() {
@@ -83,8 +79,6 @@ public class Queue {
         Node walking2 = queue.last;
         if (walking.getPerson() == walking2.getPerson()) {
             do {
-                System.out.println("Walking = " + walking.getPerson());
-                System.out.println("Walking2 = " + walking2.getPerson());
                 if (walking.getPerson() != walking2.getPerson()) {
                     return false;
                 }
@@ -94,6 +88,19 @@ public class Queue {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        Node walking = last;
+        int prime = 3;
+        int result = 1;
+        do {
+            result = prime * result + (walking.hashCode());
+            walking = walking.getPrev();
+        } while (walking != null);
+        return result;
+    }
+
 
     public boolean contains(Person person) {
         Node walking = last;
@@ -107,20 +114,20 @@ public class Queue {
         return false;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(last);
-    }
-
     public void clear() {
         last = null;
     }
 
     @Override
     public String toString() {
-        return "Queue{" +
-                "last=" + last +
-                '}';
+        StringBuilder s = new StringBuilder();
+        do {
+            s.append(last.getPerson());
+            last = last.prev;
+        } while (last != null);
+        return s.toString();
     }
 }
+
+
 
