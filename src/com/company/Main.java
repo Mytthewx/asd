@@ -9,14 +9,15 @@ public class Main {
         Person person2 = new Person("Andrzej");
         Person person3 = new Person("Marcin");
         Person person4 = new Person("Krystian");
-        queue.add(person1);
-        queue.add(person2);
-        queue.add(person3);
-        queue.add(person4);
-        queue1.add(person1);
-        queue1.add(person3);
-        System.out.println(queue.hashCode());
-        System.out.println(queue1.hashCode());
-        System.out.println(queue);
+        Person p = new Person("xyz");
+        Queue q1 = new Queue();
+        q1.add(null);
+        System.out.println(q1.contains(p)); // oczekujemy false
+        System.out.println(q1.contains(null)); // oczekujemy true
+        Queue q2 = new Queue();
+        q2.add(p);
+        System.out.println(q2.contains(p)); // oczekujemy true
+        System.out.println(q2.contains(null)); // oczekujemy false
+
     }
 }

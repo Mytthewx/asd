@@ -25,7 +25,7 @@ public class Queue {
 
         @Override
         public int hashCode() {
-            return person.hashCode();
+            return person == null ? 0 : person.hashCode();
         }
 
         @Override
@@ -104,8 +104,17 @@ public class Queue {
 
     public boolean contains(Person person) {
         Node walking = last;
+        if (size() == 0) {
+            return false;
+        }
         do {
             if (walking.getPerson() == person) {
+                return true;
+            }
+            if (walking.getPerson() == null) {
+                return false;
+            }
+            if (walking.getPerson().equals(person)) {
                 return true;
             }
             walking = walking.getPrev();
