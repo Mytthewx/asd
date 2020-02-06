@@ -31,7 +31,9 @@ public class Queue {
 
     public Person removeFirst() {
         Node walking = last;
-        do walking = walking.getPrev(); while (walking.getPrev().getPrev() != null);
+        do {
+            walking = walking.getPrev();
+        } while (walking.getPrev().getPrev() != null);
         Person flag = walking.getPrev().getPerson();
         walking.getPrev().setPrev(null);
         return flag;
@@ -45,7 +47,9 @@ public class Queue {
 
     public int size() {
         Node walking = last;
-        if (walking == null) return 0;
+        if (walking == null) {
+            return 0;
+        }
         int counter = 0;
         do {
             walking = walking.getPrev();
@@ -56,17 +60,27 @@ public class Queue {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Queue queue = (Queue) o;
-        if (size() != queue.size()) return false;
+        if (size() != queue.size()) {
+            return false;
+        }
         Node walking = last;
         Node walking2 = queue.last;
-        if (walking.getPerson().equals(walking2.getPerson())) do {
-            if (walking.getPerson() != walking2.getPerson()) return false;
-            walking = walking.getPrev();
-            walking2 = walking2.getPrev();
-        } while (walking != null);
+        if (walking.getPerson().equals(walking2.getPerson())) {
+            do {
+                if (walking.getPerson() != walking2.getPerson()) {
+                    return false;
+                }
+                walking = walking.getPrev();
+                walking2 = walking2.getPrev();
+            } while (walking != null);
+        }
         return true;
     }
 
@@ -85,11 +99,19 @@ public class Queue {
 
     public boolean contains(Person person) {
         Node walking = last;
-        if (size() == 0) return false;
+        if (size() == 0) {
+            return false;
+        }
         do {
-            if (walking.getPerson() == person) return true;
-            if (walking.getPerson() == null) return false;
-            if (walking.getPerson().equals(person)) return true;
+            if (walking.getPerson() == person) {
+                return true;
+            }
+            if (walking.getPerson() == null) {
+                return false;
+            }
+            if (walking.getPerson().equals(person)) {
+                return true;
+            }
             walking = walking.getPrev();
         } while (walking != null);
         return false;
