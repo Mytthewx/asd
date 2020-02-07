@@ -7,7 +7,7 @@ stages:
 compile:
   stage: build
   script:
-    - mvn clean install compiler:compile
+    - mvn install -DskipTests
 
 junit:
   stage: test
