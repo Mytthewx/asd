@@ -11,6 +11,7 @@ public class QueueTest {
         // given
         Queue queue = new Queue();
         Person person = new Person("Maciej");
+        queue.add(person);
         // when
         Person gotPerson = queue.get();
         // then
