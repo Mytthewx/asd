@@ -9,15 +9,9 @@ public class Main {
         Person person2 = new Person("Andrzej");
         Person person3 = new Person("Marcin");
         Person person4 = new Person("Krystian");
-        Person p = new Person("xyz");
-        Queue q1 = new Queue();
-        q1.add(null);
-        System.out.println(q1.contains(p)); // oczekujemy false
-        System.out.println(q1.contains(null)); // oczekujemy true
-        Queue q2 = new Queue();
-        q2.add(p);
-        System.out.println(q2.contains(p)); // oczekujemy true
-        System.out.println(q2.contains(null)); // oczekujemy false
+        queue.add(person1);
+        queue1.add(person1);
+        System.out.println(queue1.equals(queue));
 
     }
 }

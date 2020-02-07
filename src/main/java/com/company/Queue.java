@@ -29,7 +29,7 @@ public class Queue {
         }
     }
 
-    public Person removeFirst() {
+    public Person get() {
         Node walking = last;
         do {
             walking = walking.getPrev();
@@ -74,7 +74,7 @@ public class Queue {
         Node walking2 = queue.last;
         if (walking.getPerson().equals(walking2.getPerson())) {
             do {
-                if (walking.getPerson() != walking2.getPerson()) {
+                if (!walking.getPerson().equals(walking2.getPerson())) {
                     return false;
                 }
                 walking = walking.getPrev();
