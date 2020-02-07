@@ -1,0 +1,15 @@
+image: maven:latest
+
+stages:
+  - build
+  - test
+
+compile:
+  stage: build
+  script:
+    - mvn clean install compiler:compile
+
+junit:
+  stage: test
+  script:
+    - mvn validate

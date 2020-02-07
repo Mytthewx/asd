@@ -31,6 +31,11 @@ public class Queue {
 
     public Person get() {
         Node walking = last;
+        if (walking.getPrev() == null) {
+            Person flag = walking.getPerson();
+            walking.setPerson(null);
+            return flag;
+        }
         do {
             walking = walking.getPrev();
         } while (walking.getPrev().getPrev() != null);
