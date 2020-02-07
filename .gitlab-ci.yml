@@ -12,4 +12,4 @@ compile:
 junit:
   stage: test
   script:
-    - mvn validate
+    - mvn test
