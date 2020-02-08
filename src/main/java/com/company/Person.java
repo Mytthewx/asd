@@ -1,14 +1,8 @@
 package com.company;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Value;
 
-@ToString
-@EqualsAndHashCode
+@Value
 public class Person {
-    private String name;
-
-    public Person(String name) {
-        this.name = name;
-    }
+	private String name;
 }
