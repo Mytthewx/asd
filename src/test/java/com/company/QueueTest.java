@@ -103,6 +103,21 @@ public class QueueTest {
     }
 
     @Test
+    public void containsPersonWithTheSameName() {
+        // given
+        Queue queue = new Queue();
+        Queue queue2 = new Queue();
+        Person person = new Person("Maciej");
+        Person person2 = new Person("Maciej");
+        queue.add(person);
+        queue2.add(person2);
+        // when
+        boolean result = queue.contains(person2);
+        // then
+        assertTrue(result);
+    }
+
+    @Test
     public void getSizeOfEmptyQueue() {
         // given
         Queue queue = new Queue();
@@ -189,6 +204,26 @@ public class QueueTest {
     }
 
     @Test
+    public void equalThis() {
+        // given
+        Queue queue = new Queue();
+        // when
+        boolean result = queue.equals(queue);
+        //then
+        assertTrue(result);
+    }
+
+    @Test
+    public void equalsNull() {
+        // given
+        Queue queue = new Queue();
+        // when
+        boolean result = queue.equals(null);
+        // then
+        assertFalse(result);
+    }
+
+    @Test
     public void clearTest() {
         // given
         Queue queue = new Queue();
@@ -253,4 +288,15 @@ public class QueueTest {
         // then
         assertEquals("Person(name=Mateusz)", result);
     }
+
+//    @Test
+//    public void toStringNode() {
+//        // given
+//        Person person = new Person("Mateusz");
+//        Queue.Node node = new Queue.Node(person);
+//        // when
+//        String result = node.toString();
+//        // then
+//        assertEquals("Person(name=Mateusz)", result);
+//    }
 }

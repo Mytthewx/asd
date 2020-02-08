@@ -1,41 +1,21 @@
 package com.company;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
-@Getter
-@Setter
 public class Queue {
     private Node last;
 
     @Getter
     @Setter
+    @EqualsAndHashCode
     private static class Node {
         private Node prev;
         private Person person;
 
         public Node(Person person) {
             this.person = person;
-        }
-
-        @Override
-        public int hashCode() {
-            return person == null ? 0 : person.hashCode();
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-            Node node = (Node) o;
-            return Objects.equals(prev, node.prev) &&
-                    Objects.equals(person, node.person);
         }
 
         @Override
