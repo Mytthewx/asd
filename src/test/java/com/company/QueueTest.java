@@ -19,6 +19,20 @@ public class QueueTest {
     }
 
     @Test
+    public void getCorrectPersonAfterAddFewObjects() {
+        // given
+        Queue queue = new Queue();
+        Person person1 = new Person("Maciek");
+        Person person2 = new Person("Mateusz");
+        Person person3 = new Person("Dawid");
+        Person person4 = new Person("Pawel");
+        // when
+        Person gotPerson = queue.get();
+        // then
+        assertEquals(person1, gotPerson);
+    }
+
+    @Test
     public void containsNullAfterAddingNull() {
         // given
         Queue queue = new Queue();
