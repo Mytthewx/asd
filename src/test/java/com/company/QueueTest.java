@@ -3,6 +3,8 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+
 import static org.junit.Assert.*;
 
 public class QueueTest {
@@ -26,10 +28,31 @@ public class QueueTest {
         Person person2 = new Person("Mateusz");
         Person person3 = new Person("Dawid");
         Person person4 = new Person("Pawel");
+        queue.add(person1);
+        queue.add(person2);
+        queue.add(person3);
+        queue.add(person4);
         // when
         Person gotPerson = queue.get();
+        Person gotPerson2 = queue.get();
+        Person gotPerson3 = queue.get();
+        Person gotPerson4 = queue.get();
         // then
         assertEquals(person1, gotPerson);
+        assertEquals(person2, gotPerson2);
+        assertEquals(person3, gotPerson3);
+        assertEquals(person4, gotPerson4);
+    }
+
+    @Test
+    public void containsEmptyQueue() {
+        // given
+        Queue queue = new Queue();
+        Person person = new Person("Damian");
+        // when
+        boolean result = queue.contains(person);
+        // then
+        assertFalse(result);
     }
 
     @Test
@@ -116,7 +139,7 @@ public class QueueTest {
     }
 
     @Test
-    public void equalMethodTest() {
+    public void equalMethodWithSameObjects() {
         // given
         Queue queue1 = new Queue();
         Queue queue2 = new Queue();
@@ -127,5 +150,107 @@ public class QueueTest {
         boolean result = queue1.equals(queue2);
         // then
         assertTrue(result);
+    }
+
+    @Test
+    public void equalMethodWithDifferentObjects() {
+        // given
+        Queue queue = new Queue();
+        Queue queue1 = new Queue();
+        Person person1 = new Person("Maciek");
+        Person person2 = new Person("Darek");
+        Person person3 = new Person("Mariusz");
+        queue.add(null);
+        queue.add(person1);
+        queue1.add(null);
+        queue1.add(person2);
+        queue.add(person3);
+        queue1.add(person3);
+        // when
+        boolean result = queue.equals(queue1);
+        // then
+        assertFalse(result);
+    }
+
+    @Test
+    public void equalMethodWithDifferentSize() {
+        // given
+        Queue queue = new Queue();
+        Queue queue1 = new Queue();
+        Person person1 = new Person("Maciek");
+        Person person2 = new Person("Dariusz");
+        queue.add(person1);
+        queue.add(person2);
+        queue1.add(person1);
+        // when
+        boolean result = queue.equals(queue1);
+        // then
+        assertFalse(result);
+    }
+
+    @Test
+    public void clearTest() {
+        // given
+        Queue queue = new Queue();
+        queue.add(new Person("Maciej"));
+        queue.add(new Person("Dariusz"));
+        queue.add(new Person("Arkadiusz"));
+        // when
+        queue.clear();
+        // then
+        assertEquals(0, queue.size());
+    }
+
+    @Test
+    public void clearWithNull() {
+        // given
+        Queue queue = new Queue();
+        queue.add(null);
+        queue.add(null);
+        queue.add(null);
+        // when
+        queue.clear();
+        // then
+        assertEquals(0, queue.size());
+    }
+
+    @Test
+    public void clearEmptyQueue() {
+        // given
+        Queue queue = new Queue();
+        // when
+        queue.clear();
+        // then
+        assertEquals(0, queue.size());
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // given
+        HashSet<Queue> hashSet = new HashSet<>();
+        Queue queue = new Queue();
+        Queue queue1 = new Queue();
+        Queue queue2 = new Queue();
+        queue.add(new Person("Maciej"));
+        queue1.add(new Person("Dariusz"));
+        queue2.add(new Person("Pawel"));
+        hashSet.add(queue);
+        hashSet.add(queue1);
+        hashSet.add(queue2);
+        // when
+        int result = hashSet.size();
+        // then
+        assertEquals(3, result);
+    }
+
+    @Test
+    public void toStringTest() {
+        // given
+        Queue queue = new Queue();
+        queue.add(new Person("Mateusz"));
+        // when
+        String result = queue.toString();
+        // then
+        assertEquals("Person(name=Mateusz)", result);
     }
 }
