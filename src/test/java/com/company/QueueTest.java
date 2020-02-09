@@ -12,7 +12,7 @@ public class QueueTest {
 	@Test
 	public void getCorrectPersonAfterAdd() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		Person person = new Person("Maciej");
 		queue.add(person);
 
@@ -26,7 +26,7 @@ public class QueueTest {
 	@Test
 	public void getCorrectPersonAfterAddFewObjects() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		Person person1 = new Person("Maciek");
 		Person person2 = new Person("Mateusz");
 		Person person3 = new Person("Dawid");
@@ -52,7 +52,7 @@ public class QueueTest {
 	@Test
 	public void containsEmptyQueue() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		Person person = new Person("Damian");
 
 		// when
@@ -65,7 +65,7 @@ public class QueueTest {
 	@Test
 	public void containsNullAfterAddingNull() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(null);
 
 		// when
@@ -79,7 +79,7 @@ public class QueueTest {
 	public void containsPersonAfterAddingNull() {
 		// given
 		Person person = new Person("Andrzej");
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(null);
 
 		// when
@@ -92,7 +92,7 @@ public class QueueTest {
 	@Test
 	public void containsPersonAfterAddPerson() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		Person person = new Person("Marek");
 		queue.add(person);
 
@@ -106,7 +106,7 @@ public class QueueTest {
 	@Test
 	public void containsNullAfterAddPerson() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		Person person = new Person("Dariusz");
 		queue.add(person);
 
@@ -120,8 +120,8 @@ public class QueueTest {
 	@Test
 	public void containsPersonWithTheSameName() {
 		// given
-		Queue queue = new Queue();
-		Queue queue2 = new Queue();
+		Queue<Person> queue = new Queue();
+		Queue<Person> queue2 = new Queue();
 		Person person = new Person("Maciej");
 		Person person2 = new Person("Maciej");
 		queue.add(person);
@@ -137,7 +137,7 @@ public class QueueTest {
 	@Test
 	public void getSizeOfEmptyQueue() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 
 		// when
 		int result = queue.size();
@@ -149,7 +149,7 @@ public class QueueTest {
 	@Test
 	public void getSizeOfQueueWithNull() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(null);
 
 		// when
@@ -162,7 +162,7 @@ public class QueueTest {
 	@Test
 	public void getSizeOfQueueWithFiveObjects() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(new Person("Mateusz"));
 		queue.add(new Person("Dawid"));
 		queue.add(new Person("Dariusz"));
@@ -179,8 +179,8 @@ public class QueueTest {
 	@Test
 	public void equalMethodWithSameObjects() {
 		// given
-		Queue queue1 = new Queue();
-		Queue queue2 = new Queue();
+		Queue<Person> queue1 = new Queue();
+		Queue<Person> queue2 = new Queue();
 		Person person = new Person("Dawid");
 		queue1.add(person);
 		queue2.add(person);
@@ -195,8 +195,8 @@ public class QueueTest {
 	@Test
 	public void equalMethodWithDifferentObjects() {
 		// given
-		Queue queue = new Queue();
-		Queue queue1 = new Queue();
+		Queue<Person> queue = new Queue();
+		Queue<Person> queue1 = new Queue();
 		Person person1 = new Person("Maciek");
 		Person person2 = new Person("Darek");
 		Person person3 = new Person("Mariusz");
@@ -217,8 +217,8 @@ public class QueueTest {
 	@Test
 	public void equalMethodWithDifferentSize() {
 		// given
-		Queue queue = new Queue();
-		Queue queue1 = new Queue();
+		Queue<Person> queue = new Queue();
+		Queue<Person> queue1 = new Queue();
 		Person person1 = new Person("Maciek");
 		Person person2 = new Person("Dariusz");
 		queue.add(person1);
@@ -235,7 +235,7 @@ public class QueueTest {
 	@Test
 	public void equalThis() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 
 		// when
 		boolean result = queue.equals(queue);
@@ -247,7 +247,7 @@ public class QueueTest {
 	@Test
 	public void equalsNull() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 
 		// when
 		boolean result = queue.equals(null);
@@ -259,7 +259,7 @@ public class QueueTest {
 	@Test
 	public void clearTest() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(new Person("Maciej"));
 		queue.add(new Person("Dariusz"));
 		queue.add(new Person("Arkadiusz"));
@@ -274,7 +274,7 @@ public class QueueTest {
 	@Test
 	public void clearWithNull() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(null);
 		queue.add(null);
 		queue.add(null);
@@ -289,7 +289,7 @@ public class QueueTest {
 	@Test
 	public void clearEmptyQueue() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 
 		// when
 		queue.clear();
@@ -302,9 +302,9 @@ public class QueueTest {
 	public void hashCodeTest() {
 		// given
 		HashSet<Queue> hashSet = new HashSet<>();
-		Queue queue = new Queue();
-		Queue queue1 = new Queue();
-		Queue queue2 = new Queue();
+		Queue<Person> queue = new Queue();
+		Queue<Person> queue1 = new Queue();
+		Queue<Person> queue2 = new Queue();
 		queue.add(new Person("Maciej"));
 		queue1.add(new Person("Dariusz"));
 		queue2.add(new Person("Pawel"));
@@ -322,7 +322,7 @@ public class QueueTest {
 	@Test
 	public void toStringTest() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		queue.add(new Person("Mateusz"));
 
 		// when
@@ -335,7 +335,7 @@ public class QueueTest {
 	@Test
 	public void testToStringGetAndSize() {
 		// given
-		Queue queue = new Queue();
+		Queue<Person> queue = new Queue();
 		Person person = new Person("Maciej");
 
 		// when

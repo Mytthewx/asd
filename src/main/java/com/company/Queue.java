@@ -4,42 +4,42 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Queue {
+public class Queue<E> {
 	private Node last;
 
 	@Getter
 	@Setter
 	@EqualsAndHashCode
-	private static class Node {
+	private class Node {
 		private Node prev;
-		private Person person;
+		private E value;
 
-		public Node(Person person) {
-			this.person = person;
+		public Node(E value) {
+			this.value = value;
 		}
 
 		@Override
 		public String toString() {
-			return String.valueOf(person);
+			return String.valueOf(value);
 		}
 	}
 
-	public Person get() {
+	public E get() {
 		Node walking = last;
 		if (walking.getPrev() == null) {
-			Person flag = walking.getPerson();
-			walking.setPerson(null);
+			E flag = walking.getValue();
+			walking.setValue(null);
 			return flag;
 		}
 		while (walking.getPrev().getPrev() != null) {
 			walking = walking.getPrev();
 		}
-		Person flag = walking.getPrev().getPerson();
+		E flag = walking.getPrev().getValue();
 		walking.setPrev(null);
 		return flag;
 	}
 
-	public void add(Person person) {
+	public void add(E person) {
 		Node node = new Node(person);
 		node.setPrev(last);
 		last = node;
@@ -94,19 +94,19 @@ public class Queue {
 		return result;
 	}
 
-	public boolean contains(Person person) {
+	public boolean contains(E person) {
 		Node walking = last;
 		if (size() == 0) {
 			return false;
 		}
 		do {
-			if (walking.getPerson() == person) {
+			if (walking.getValue() == person) {
 				return true;
 			}
-			if (walking.getPerson() == null) {
+			if (walking.getValue() == null) {
 				return false;
 			}
-			if (walking.getPerson().equals(person)) {
+			if (walking.getValue().equals(person)) {
 				return true;
 			}
 			walking = walking.getPrev();
