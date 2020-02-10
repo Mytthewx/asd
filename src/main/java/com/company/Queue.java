@@ -66,7 +66,7 @@ public class Queue<E> {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Queue queue = (Queue) o;
+		Queue<E> queue = (Queue<E>) o;
 		if (size() != queue.size()) {
 			return false;
 		}
