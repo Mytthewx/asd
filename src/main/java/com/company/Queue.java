@@ -39,8 +39,8 @@ public class Queue<E> {
 		return flag;
 	}
 
-	public void add(E person) {
-		Node node = new Node(person);
+	public void add(E value) {
+		Node node = new Node(value);
 		node.setPrev(last);
 		last = node;
 	}
@@ -94,19 +94,19 @@ public class Queue<E> {
 		return result;
 	}
 
-	public boolean contains(E person) {
+	public boolean contains(E value) {
 		Node walking = last;
 		if (size() == 0) {
 			return false;
 		}
 		do {
-			if (walking.getValue() == person) {
+			if (walking.getValue() == value) {
 				return true;
 			}
 			if (walking.getValue() == null) {
 				return false;
 			}
-			if (walking.getValue().equals(person)) {
+			if (walking.getValue().equals(value)) {
 				return true;
 			}
 			walking = walking.getPrev();

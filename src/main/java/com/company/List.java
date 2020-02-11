@@ -48,6 +48,10 @@ public class List<E> {
 		return 0;
 	}
 
+	public boolean contains(E value) {
+		return true;
+	}
+
 
 	@Override
 	public String toString() {
