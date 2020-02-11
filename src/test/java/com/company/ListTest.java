@@ -215,4 +215,38 @@ public class ListTest {
 		assertFalse(result2);
 	}
 
+	@Test
+	public void setPerson() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Maciej");
+		Person person1 = new Person("Mateusz");
+		Person person2 = new Person("Dawid");
+		list.add(person);
+		list.add(person1);
+		list.add(person2);
+
+		// when
+		list.set(2, person);
+
+		// then
+		assertEquals(list.get(2), person);
+		assertEquals(list.get(0), person);
+	}
+
+	@Test
+	public void setNull() {
+		// given
+		List<Person> list = new List<>();
+		list.add(new Person("Maciej"));
+		list.add(new Person("Darek"));
+		list.add(new Person("Marek"));
+
+		// when
+		list.set(1, null);
+
+		// then
+		assertEquals(list.get(1), null);
+	}
+
 }
