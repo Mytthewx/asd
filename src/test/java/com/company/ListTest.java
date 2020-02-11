@@ -246,7 +246,19 @@ public class ListTest {
 		list.set(1, null);
 
 		// then
-		assertEquals(list.get(1), null);
+		assertNull(list.get(1));
 	}
 
+	@Test
+	public void setOnNonExistentIndex() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Andrzej");
+
+		// when
+		list.set(5, person);
+
+		// then
+
+	}
 }
