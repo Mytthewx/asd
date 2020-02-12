@@ -6,6 +6,7 @@ import lombok.Setter;
 
 public class List<E> {
 	private Node last;
+	private int index;
 
 	@Getter
 	@Setter
@@ -18,6 +19,7 @@ public class List<E> {
 			this.value = value;
 		}
 
+
 		@Override
 		public String toString() {
 			return String.valueOf(value);
@@ -25,7 +27,6 @@ public class List<E> {
 	}
 
 	public E get(int i) {
-		return null;
 	}
 
 	public E remove(int i) {
