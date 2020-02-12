@@ -249,7 +249,7 @@ public class ListTest {
 		assertNull(list.get(1));
 	}
 
-	@Test
+	@Test(expected = IndexOutOfBoundsException.class)
 	public void setOnNonExistentIndex() {
 		// given
 		List<Person> list = new List<>();
@@ -257,8 +257,5 @@ public class ListTest {
 
 		// when
 		list.set(5, person);
-
-		// then
-
 	}
 }
