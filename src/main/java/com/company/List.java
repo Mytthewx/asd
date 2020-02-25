@@ -6,13 +6,13 @@ import lombok.Setter;
 
 public class List<E> {
 	private Node last;
-	private int index;
 
 	@Getter
 	@Setter
 	@EqualsAndHashCode
 	private class Node {
 		private Node prev;
+		private Node next;
 		private E value;
 
 		public Node(E value) {
@@ -27,6 +27,7 @@ public class List<E> {
 	}
 
 	public E get(int i) {
+		return null;
 	}
 
 	public E remove(int i) {
@@ -37,8 +38,10 @@ public class List<E> {
 		return null;
 	}
 
-	public E add(Person person) {
-		return null;
+	public void add(E value) {
+		Node node = new Node(value);
+		node.setPrev(last);
+		last = node;
 	}
 
 	public E set(int i, Person person) {

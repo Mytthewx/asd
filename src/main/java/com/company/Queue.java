@@ -6,6 +6,7 @@ import lombok.Setter;
 
 public class Queue<E> {
 	private Node last;
+	private int counter;
 
 	@Getter
 	@Setter
@@ -26,6 +27,7 @@ public class Queue<E> {
 
 	public E get() {
 		Node walking = last;
+		counter--;
 		if (walking.getPrev() == null) {
 			E flag = walking.getValue();
 			walking.setValue(null);
@@ -43,18 +45,19 @@ public class Queue<E> {
 		Node node = new Node(value);
 		node.setPrev(last);
 		last = node;
+		counter++;
 	}
 
 	public int size() {
-		Node walking = last;
-		if (walking == null) {
-			return 0;
-		}
-		int counter = 0;
-		do {
-			walking = walking.getPrev();
-			counter++;
-		} while (walking != null);
+//		Node walking = last;
+//		if (walking == null) {
+//			return 0;
+//		}
+//		int counter = 0;
+//		do {
+//			walking = walking.getPrev();
+//			counter++;
+//		} while (walking != null);
 		return counter;
 	}
 

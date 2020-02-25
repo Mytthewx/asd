@@ -346,4 +346,8 @@ public class QueueTest {
 		assertEquals(person, queue.get());
 		assertEquals(1, queue.size());
 	}
+
+	// size dla pustej kolejki
+	// size po dodaniu i usunieciu elementu
+	// size po clear
 }
