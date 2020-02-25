@@ -6,6 +6,7 @@ import lombok.Setter;
 
 public class List<E> {
 	private Node last;
+	private int size;
 
 	@Getter
 	@Setter
@@ -27,14 +28,22 @@ public class List<E> {
 	}
 
 	public E get(int i) {
+		Node walking = last;
+		int counter = size;
+		while (counter != i) {
+			counter--;
+		}
+
 		return null;
 	}
 
 	public E remove(int i) {
+		size--;
 		return null;
 	}
 
 	public E remove(Person person) {
+		size--;
 		return null;
 	}
 
@@ -42,6 +51,7 @@ public class List<E> {
 		Node node = new Node(value);
 		node.setPrev(last);
 		last = node;
+		size++;
 	}
 
 	public E set(int i, Person person) {
@@ -49,7 +59,7 @@ public class List<E> {
 	}
 
 	public int size() {
-		return 0;
+		return size;
 	}
 
 	public boolean contains(E value) {
