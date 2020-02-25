@@ -147,6 +147,55 @@ public class QueueTest {
 	}
 
 	@Test
+	public void getSizeOfQueueAfterAddAndRemove() {
+		// given
+		Queue<Person> queue = new Queue<>();
+		queue.add(new Person("Mateusz"));
+		queue.get();
+
+		// when
+		int result = queue.size();
+
+		// then
+		assertEquals(0, result);
+	}
+
+	@Test
+	public void getSizeOfQueueAfterAddFourObjectsAndRemoveTwoObjects() {
+		// given
+		Queue<Person> queue = new Queue<>();
+		queue.add(new Person("Mateusz"));
+		queue.add(new Person("Dariusz"));
+		queue.add(new Person("Arkadiusz"));
+		queue.add(new Person("Marek"));
+		queue.get();
+		queue.get();
+
+		// when
+		int result = queue.size();
+
+		// then
+		assertEquals(2, result);
+	}
+
+	@Test
+	public void getSizeOfQueueAfterClear() {
+		// given
+		Queue<Person> queue = new Queue<>();
+		queue.add(new Person("Mateusz"));
+		queue.add(new Person("Andrzej"));
+		queue.add(new Person("Dariusz"));
+		queue.add(new Person("Arkadiusz"));
+		queue.clear();
+
+		// when
+		int result = queue.size();
+
+		// then
+		assertEquals(0, result);
+	}
+
+	@Test
 	public void getSizeOfQueueWithNull() {
 		// given
 		Queue<Person> queue = new Queue();
@@ -346,8 +395,4 @@ public class QueueTest {
 		assertEquals(person, queue.get());
 		assertEquals(1, queue.size());
 	}
-
-	// size dla pustej kolejki
-	// size po dodaniu i usunieciu elementu
-	// size po clear
 }

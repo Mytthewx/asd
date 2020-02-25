@@ -49,15 +49,6 @@ public class Queue<E> {
 	}
 
 	public int size() {
-//		Node walking = last;
-//		if (walking == null) {
-//			return 0;
-//		}
-//		int counter = 0;
-//		do {
-//			walking = walking.getPrev();
-//			counter++;
-//		} while (walking != null);
 		return counter;
 	}
 
@@ -119,6 +110,7 @@ public class Queue<E> {
 
 	public void clear() {
 		last = null;
+		counter = 0;
 	}
 
 	@Override
