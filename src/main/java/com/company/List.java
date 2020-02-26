@@ -42,6 +42,13 @@ public class List<E> {
 	}
 
 	public E remove(int i) {
+		Node walking = last;
+		int counter = size - 1;
+		while (counter != i) {
+			counter--;
+			walking = walking.getPrev();
+		}
+		walking.setValue(null);
 		size--;
 		return null;
 	}
