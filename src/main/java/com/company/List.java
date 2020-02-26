@@ -29,12 +29,16 @@ public class List<E> {
 
 	public E get(int i) {
 		Node walking = last;
-		int counter = size;
+		int counter = size - 1;
+		if (i >= size) {
+			throw new IndexOutOfBoundsException("index: " + i + ", size: " + size);
+		}
 		while (counter != i) {
 			counter--;
+			walking = walking.getPrev();
 		}
-
-		return null;
+		E flag = walking.getValue();
+		return flag;
 	}
 
 	public E remove(int i) {

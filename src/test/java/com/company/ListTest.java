@@ -13,6 +13,7 @@ public class ListTest {
 		// given
 		List<Person> list = new List<>();
 		Person person = new Person("Daniel");
+		list.add(person);
 		list.add(new Person("Mateusz"));
 
 		// when
@@ -51,6 +52,19 @@ public class ListTest {
 
 		// then
 		assertNull(gotPerson);
+	}
+
+	// shouldThrowExceptionGettingPersonOnNonExistingIndex
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void getObjectAfterAddToListAndThenRemoveFromListUsingIndexOfObject() {
+		// given
+		List<Person> list = new List<>();
+		list.add(new Person("Mateusz"));
+		list.add(new Person("Daniel"));
+		list.remove(1);
+
+		// when
+		list.get(1);
 	}
 
 	@Test
