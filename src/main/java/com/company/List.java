@@ -37,8 +37,7 @@ public class List<E> {
 			counter--;
 			walking = walking.getPrev();
 		}
-		E flag = walking.getValue();
-		return flag;
+		return walking.getValue();
 	}
 
 	public E remove(int i) {
@@ -48,14 +47,22 @@ public class List<E> {
 			counter--;
 			walking = walking.getPrev();
 		}
+		E flag = walking.getValue();
 		walking.setValue(null);
 		size--;
-		return null;
+		return flag;
 	}
 
-	public E remove(Person person) {
+	public int remove(Person person) {
+		Node walking = last;
+		int counter = size - 1;
+		while (walking.getValue() != person) {
+			counter--;
+			walking = walking.getPrev();
+		}
+		walking.setValue(null);
 		size--;
-		return null;
+		return counter;
 	}
 
 	public void add(E value) {
@@ -69,14 +76,31 @@ public class List<E> {
 		return null;
 	}
 
+	public boolean contains(E value) {
+		Node walking = last;
+		int counter = size - 1;
+		if (size() == 0) {
+			return false;
+		}
+		do {
+			if (walking.getValue() == value) {
+				return true;
+			}
+			if (walking.getValue() == null) {
+				return false;
+			}
+			if (walking.getValue().equals(value)) {
+				return true;
+			}
+			walking = walking.getPrev();
+			counter--;
+		} while (counter != -1);
+		return false;
+	}
+
 	public int size() {
 		return size;
 	}
-
-	public boolean contains(E value) {
-		return true;
-	}
-
 
 	@Override
 	public String toString() {
