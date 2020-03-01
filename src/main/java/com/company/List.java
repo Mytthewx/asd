@@ -72,8 +72,17 @@ public class List<E> {
 		size++;
 	}
 
-	public E set(int i, Person person) {
-		return null;
+	public void set(int i, E value) {
+		Node walking = last;
+		int counter = size - 1;
+		if (i > size) {
+			throw new IndexOutOfBoundsException("index: " + i + ", size: " + size);
+		}
+		while (counter != i) {
+			counter--;
+			walking = walking.getPrev();
+		}
+		walking.setValue(value);
 	}
 
 	public boolean contains(E value) {

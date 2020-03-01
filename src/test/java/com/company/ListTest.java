@@ -244,23 +244,28 @@ public class ListTest {
 		list.set(2, person);
 
 		// then
-		assertEquals(list.get(2), person);
 		assertEquals(list.get(0), person);
+		assertEquals(list.get(1), person1);
+		assertEquals(list.get(2), person);
 	}
 
 	@Test
 	public void setNull() {
 		// given
 		List<Person> list = new List<>();
-		list.add(new Person("Maciej"));
+		Person person = new Person("Maciej");
+		Person person2 = new Person("Marek");
+		list.add(person);
 		list.add(new Person("Darek"));
-		list.add(new Person("Marek"));
+		list.add(person2);
 
 		// when
 		list.set(1, null);
 
 		// then
+		assertEquals(list.get(0), person);
 		assertNull(list.get(1));
+		assertEquals(list.get(2), person2);
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
