@@ -392,7 +392,8 @@ public class QueueTest {
 
 		// then
 		assertEquals("Person(name=Maciej)", queue.toString());
-		assertEquals(person, queue.get());
 		assertEquals(1, queue.size());
+		assertEquals(person, queue.get());
+		assertEquals(0, queue.size());
 	}
 }
