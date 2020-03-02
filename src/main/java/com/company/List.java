@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 public class List<E> {
 	private Node last;
 	private int size;
@@ -78,6 +80,9 @@ public class List<E> {
 		if (i > size) {
 			throw new IndexOutOfBoundsException("index: " + i + ", size: " + size);
 		}
+		if (i < 0) {
+			throw new IndexOutOfBoundsException("index: " + i + ", size: " + size);
+		}
 		while (counter != i) {
 			counter--;
 			walking = walking.getPrev();
@@ -95,15 +100,12 @@ public class List<E> {
 			if (walking.getValue() == value) {
 				return true;
 			}
-			if (walking.getValue() == null) {
-				return false;
-			}
-			if (walking.getValue().equals(value)) {
+			if (Objects.equals(walking.getValue(), value)) {
 				return true;
 			}
 			walking = walking.getPrev();
 			counter--;
-		} while (counter != -1);
+		} while (walking != null);
 		return false;
 	}
 
@@ -116,7 +118,7 @@ public class List<E> {
 		StringBuilder s = new StringBuilder();
 		Node walking = last;
 		while (walking != null) {
-			s.append(walking);
+			s.append(walking.getValue());
 			walking = walking.prev;
 		}
 		return s.toString();

@@ -218,7 +218,7 @@ public class ListTest {
 	@Test
 	public void containsNullAndPersonWithEmptyList() {
 		List<Person> list = new List<>();
-		Person person = new Person("Matuesz");
+		Person person = new Person("Mateusz");
 
 		// when
 		boolean result = list.contains(null);
@@ -269,6 +269,16 @@ public class ListTest {
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
+	public void setOnIndexOutOfRange() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Andrzej");
+
+		// when
+		list.set(8937289, person);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
 	public void setOnNonExistentIndex() {
 		// given
 		List<Person> list = new List<>();
@@ -276,6 +286,16 @@ public class ListTest {
 
 		// when
 		list.set(5, person);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void setOnMinusIndex() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Andrzej");
+
+		// when
+		list.set(-1, person);
 	}
 
 
