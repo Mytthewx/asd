@@ -113,12 +113,41 @@ public class List<E> {
 		return size;
 	}
 
+	public void clear() {
+		last = null;
+		size = 0;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		List<E> list = (List<E>) o;
+		if (size() != list.size()) {
+			return false;
+		}
+		Node walking = last;
+		Node walking2 = list.last;
+		while (walking != null) {
+			if (!walking.equals(walking2)) {
+				return false;
+			}
+			walking = walking.getPrev();
+			walking2 = walking2.getPrev();
+		}
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		Node walking = last;
 		while (walking != null) {
-			s.append(walking.getValue());
+			s.append(walking);
 			walking = walking.prev;
 		}
 		return s.toString();

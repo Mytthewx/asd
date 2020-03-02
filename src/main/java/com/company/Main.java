@@ -11,7 +11,9 @@ public class Main {
 		list.add(person);
 		list.add(person2);
 		list.add(person4);
-
 		System.out.println(list.contains(person2));
+		System.out.println(list.size());
+		list.clear();
+		System.out.println(list.size());
 	}
 }

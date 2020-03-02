@@ -2,6 +2,8 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -217,6 +219,7 @@ public class ListTest {
 
 	@Test
 	public void containsNullAndPersonWithEmptyList() {
+		// given
 		List<Person> list = new List<>();
 		Person person = new Person("Mateusz");
 
@@ -227,6 +230,21 @@ public class ListTest {
 		// then
 		assertFalse(result);
 		assertFalse(result2);
+	}
+
+	@Test
+	public void containsTheSameObjects() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Mateusz");
+		Person person2 = new Person("Mateusz");
+		list.add(person);
+
+		// when
+		boolean result = list.contains(person2);
+
+		// then
+		assertTrue(result);
 	}
 
 	@Test
@@ -296,6 +314,177 @@ public class ListTest {
 
 		// when
 		list.set(-1, person);
+	}
+
+	@Test
+	public void equalMethodWithSameObjects() {
+		// given
+		List<Person> list1 = new List();
+		List<Person> list2 = new List();
+		Person person = new Person("Dawid");
+		list1.add(person);
+		list2.add(person);
+
+		// when
+		boolean result = list1.equals(list2);
+
+		// then
+		assertTrue(result);
+	}
+
+	@Test
+	public void equalMethodWithDifferentObjects() {
+		// given
+		List<Person> list1 = new List();
+		List<Person> list2 = new List();
+		Person person1 = new Person("Maciek");
+		Person person2 = new Person("Darek");
+		Person person3 = new Person("Mariusz");
+		list1.add(null);
+		list1.add(person1);
+		list2.add(null);
+		list2.add(person2);
+		list1.add(person3);
+		list2.add(person3);
+
+		// when
+		boolean result = list1.equals(list2);
+
+		// then
+		assertFalse(result);
+	}
+
+	@Test
+	public void equalMethodWithDifferentSize() {
+		// given
+		List<Person> list1 = new List();
+		List<Person> list2 = new List();
+		Person person1 = new Person("Maciek");
+		Person person2 = new Person("Dariusz");
+		list1.add(person1);
+		list1.add(person2);
+		list2.add(person1);
+
+		// when
+		boolean result = list1.equals(list2);
+
+		// then
+		assertFalse(result);
+	}
+
+	@Test
+	public void equalThis() {
+		// given
+		List<Person> list = new List();
+
+		// when
+		boolean result = list.equals(list);
+
+		//then
+		assertTrue(result);
+	}
+
+	@Test
+	public void equalsNull() {
+		// given
+		List<Person> list = new List();
+
+		// when
+		boolean result = list.equals(null);
+
+		// then
+		assertFalse(result);
+	}
+
+	@Test
+	public void clearTest() {
+		// given
+		List<Person> list = new List();
+		list.add(new Person("Maciej"));
+		list.add(new Person("Dariusz"));
+		list.add(new Person("Arkadiusz"));
+
+		// when
+		list.clear();
+
+		// then
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void clearWithNull() {
+		// given
+		List<Person> list = new List();
+		list.add(null);
+		list.add(null);
+		list.add(null);
+
+		// when
+		list.clear();
+
+		// then
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void clearEmptyList() {
+		// given
+		List<Person> list = new List();
+
+		// when
+		list.clear();
+
+		// then
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void hashCodeTest() {
+		// given
+		HashSet<List> hashSet = new HashSet<>();
+		List<Person> list = new List();
+		List<Person> list1 = new List();
+		List<Person> list2 = new List();
+		list.add(new Person("Maciej"));
+		list1.add(new Person("Dariusz"));
+		list2.add(new Person("Pawel"));
+		hashSet.add(list);
+		hashSet.add(list1);
+		hashSet.add(list2);
+
+		// when
+		int result = hashSet.size();
+
+		// then
+		assertEquals(3, result);
+	}
+
+	@Test
+	public void toStringTest() {
+		// given
+		List<Person> list = new List();
+		list.add(new Person("Mateusz"));
+
+		// when
+		String result = list.toString();
+
+		// then
+		assertEquals("Person(name=Mateusz)", result);
+	}
+
+	@Test
+	public void testToStringGetAndSize() {
+		// given
+		List<Person> list = new List();
+		Person person = new Person("Maciej");
+
+		// when
+		list.add(person);
+
+		// then
+		assertEquals("Person(name=Maciej)", list.toString());
+		assertEquals(person, list.get(0));
+		assertEquals(1, list.size());
 	}
 
 
