@@ -59,8 +59,16 @@ public class List<E> {
 		Node walking = last;
 		int counter = size - 1;
 		while (walking.getValue() != person) {
-			counter--;
+			if (counter < 0) {
+				return counter;
+			}
+			if (walking.getValue().equals(person)) {
+				walking.setValue(null);
+				size--;
+				return counter;
+			}
 			walking = walking.getPrev();
+			counter--;
 		}
 		walking.setValue(null);
 		size--;

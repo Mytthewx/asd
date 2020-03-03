@@ -144,6 +144,32 @@ public class ListTest {
 	}
 
 	@Test
+	public void removeNewPerson() {
+		// given
+		List<Person> list = new List<>();
+		list.add(new Person("Maciej"));
+
+		// when
+		list.remove(new Person("Damian"));
+
+		// then
+		assertEquals(1, list.size());
+	}
+
+	@Test
+	public void removeNewPersonWithTheSameName() {
+		// given
+		List<Person> list = new List<>();
+		list.add(new Person("Maciej"));
+
+		// when
+		list.remove(new Person("Maciej"));
+
+		// then
+		assertEquals(0, list.size());
+	}
+
+	@Test
 	public void sizeWithSomeObjects() {
 		// given
 		List<Person> list = new List<>();
@@ -287,6 +313,22 @@ public class ListTest {
 
 		// then
 		assertTrue(result);
+	}
+
+	@Test
+	public void containsAfterAddingPersonThenNullAndPerson() {
+		// given
+		List<Person> list = new List<>();
+		list.add(new Person("Maciej"));
+		list.add(null);
+		list.add(new Person("Damian"));
+		list.remove(null);
+
+		// when
+		boolean result = list.contains(null);
+
+		// then
+		assertFalse(result);
 	}
 
 	@Test
@@ -528,6 +570,4 @@ public class ListTest {
 		assertEquals(person, list.get(0));
 		assertEquals(1, list.size());
 	}
-
-
 }
