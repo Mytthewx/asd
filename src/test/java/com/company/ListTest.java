@@ -102,6 +102,48 @@ public class ListTest {
 	}
 
 	@Test
+	public void removePersonWithIndexAfterAddingThreeObjects() {
+		// given
+		List<Person> list = new List<>();
+		Person person1 = new Person("Mateusz");
+		Person person2 = new Person("Dawid");
+		Person person3 = new Person("Maciej");
+		list.add(person1);
+		list.add(person2);
+		list.add(person3);
+
+		// when
+		list.remove(1);
+
+		// then
+		assertFalse(list.contains(person2));
+		assertTrue(list.contains(person1));
+		assertTrue(list.contains(person3));
+		assertEquals(2, list.size());
+	}
+
+	@Test
+	public void removePersonWithObjectAfterAddingThreeObjects() {
+		// given
+		List<Person> list = new List<>();
+		Person person1 = new Person("Mateusz");
+		Person person2 = new Person("Dawid");
+		Person person3 = new Person("Maciej");
+		list.add(person1);
+		list.add(person2);
+		list.add(person3);
+
+		// when
+		list.remove(person2);
+
+		// then
+		assertFalse(list.contains(person2));
+		assertTrue(list.contains(person1));
+		assertTrue(list.contains(person3));
+		assertEquals(2, list.size());
+	}
+
+	@Test
 	public void sizeWithSomeObjects() {
 		// given
 		List<Person> list = new List<>();
