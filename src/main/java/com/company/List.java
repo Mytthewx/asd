@@ -58,21 +58,25 @@ public class List<E> {
 	public int remove(Person person) {
 		Node walking = last;
 		int counter = size - 1;
-		while (walking.getValue() != person) {
-			if (counter < 0) {
-				return counter;
-			}
-			if (walking.getValue().equals(person)) {
-				walking.setValue(null);
+		if (size < 1) {
+			return counter;
+		}
+		if (walking.value.equals(person)) {
+			walking.setValue(null);
+			size--;
+			return counter;
+		}
+		while (counter > 0) {
+			if (walking.getPrev().getValue().equals(person)) {
+				walking.prev = walking.prev.prev;
 				size--;
+				counter--;
 				return counter;
 			}
 			walking = walking.getPrev();
 			counter--;
 		}
-		walking.setValue(null);
-		size--;
-		return counter;
+		return -1;
 	}
 
 	public void add(E value) {
