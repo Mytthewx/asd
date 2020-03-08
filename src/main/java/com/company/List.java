@@ -55,25 +55,37 @@ public class List<E> {
 		return flag;
 	}
 
-	public int remove(Person person) {
+	public int remove(E value) {
 		Node walking = last;
 		int counter = size - 1;
-		if (size < 1) {
+		if (size < 0) {
 			return counter;
 		}
-		if (walking.value.equals(person)) {
-			walking.setValue(null);
-			size--;
-			return counter;
-		}
-		while (counter > 0) {
-			if (walking.getPrev().getValue().equals(person)) {
-				walking.prev = walking.prev.prev;
+		while (counter >= 0) {
+			if (walking.value == value) {
+				walking.value = null;
+				return counter;
+			}
+			if (walking.value.equals(value)) {
+				walking.value = null;
 				size--;
 				counter--;
 				return counter;
 			}
-			walking = walking.getPrev();
+			if (walking.prev == null) {
+				return -1;
+			}
+			if (walking.prev.value == null) {
+				walking.prev = walking.prev.prev;
+				size--;
+				return counter;
+			}
+			if (walking.prev.value.equals(value)) {
+				walking.prev.value = null;
+				size--;
+				return counter;
+			}
+			walking = walking.prev;
 			counter--;
 		}
 		return -1;

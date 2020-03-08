@@ -99,6 +99,7 @@ public class ListTest {
 		// then
 		assertTrue(list.contains(person2));
 		assertFalse(list.contains(person1));
+		assertEquals(1, list.size());
 	}
 
 	@Test
