@@ -57,32 +57,22 @@ public class List<E> {
 
 	public int remove(E value) {
 		Node walking = last;
-		int counter = size - 1;
-		if (size < 0) {
-			return counter;
+		if (size <= 0) {
+			return 0;
 		}
-		while (counter >= 0) {
-			if (walking.value == value) {
-				walking.value = null;
-				return counter;
-			}
-			if (walking.value.equals(value)) {
-				walking.value = null;
+		if (size == 1) {
+			if (Objects.equals(walking.value, value)) {
 				size--;
-				counter--;
-				return counter;
+				return 0;
 			}
-			if (walking.prev == null) {
-				return -1;
-			}
-			if (walking.prev.value == null) {
+			return -1;
+		}
+		int counter = size - 1;
+		while (counter >= 0) {
+			if (Objects.equals(walking.prev.value, value)) {
 				walking.prev = walking.prev.prev;
 				size--;
-				return counter;
-			}
-			if (walking.prev.value.equals(value)) {
-				walking.prev.value = null;
-				size--;
+				counter--;
 				return counter;
 			}
 			walking = walking.prev;

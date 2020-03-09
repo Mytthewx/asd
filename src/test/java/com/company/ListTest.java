@@ -70,18 +70,71 @@ public class ListTest {
 	}
 
 	@Test
+	public void removePersonAfterAddingPersonWithObjectArg() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Mateusz");
+		list.add(person);
+
+		// when
+		int result = list.remove(person);
+
+		// then
+		assertEquals(0, result);
+		assertFalse(list.contains(person));
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void removePersonAfterAddingPersonWithIndexArg() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Mateusz");
+		list.add(person);
+
+		// when
+		Person result = list.remove(0);
+
+		// then
+		assertEquals(person, result);
+		assertFalse(list.contains(person));
+		assertEquals(0, list.size());
+	}
+
+//	@Test
+//	public void removePersonAfterAddingPersonAndBeforeAddingSecondPerson() {
+//		// given
+//		List<Person> list = new List<>();
+//		Person person = new Person("Mateusz");
+//		Person person2 = new Person("Andrzej");
+//		list.add(person);
+//
+//
+//		// when
+//		list.remove(person);
+//		list.add(person2);
+//
+//		// then
+//		assertFalse(list.contains(person));
+//	}
+
+	@Test
 	public void removePersonWithIndex() {
 		// given
 		List<Person> list = new List<>();
-		list.add(new Person("Mariusz"));
-		list.add(new Person("Marek"));
-		int index = 0;
+		Person person = new Person("Mariusz");
+		Person person2 = new Person("Marek");
+		list.add(person);
+		list.add(person2);
 
 		// when
-		list.remove(index);
+		Person result = list.remove(0);
 
 		// then
 		assertEquals(1, list.size());
+		assertEquals(person, result);
+		assertFalse(list.contains(person));
+		assertTrue(list.contains(person2));
 	}
 
 	@Test
@@ -94,12 +147,13 @@ public class ListTest {
 		list.add(person2);
 
 		// when
-		list.remove(person1);
+		int result = list.remove(person1);
 
 		// then
 		assertTrue(list.contains(person2));
 		assertFalse(list.contains(person1));
 		assertEquals(1, list.size());
+		assertEquals(0, result);
 	}
 
 	@Test
@@ -114,13 +168,14 @@ public class ListTest {
 		list.add(person3);
 
 		// when
-		list.remove(1);
+		Person result = list.remove(1);
 
 		// then
 		assertFalse(list.contains(person2));
 		assertTrue(list.contains(person1));
 		assertTrue(list.contains(person3));
 		assertEquals(2, list.size());
+		assertEquals(person2, result);
 	}
 
 	@Test
@@ -135,13 +190,14 @@ public class ListTest {
 		list.add(person3);
 
 		// when
-		list.remove(person2);
+		int result = list.remove(person2);
 
 		// then
 		assertFalse(list.contains(person2));
 		assertTrue(list.contains(person1));
 		assertTrue(list.contains(person3));
 		assertEquals(2, list.size());
+		assertEquals(1, result);
 	}
 
 	@Test
@@ -151,9 +207,12 @@ public class ListTest {
 		list.add(new Person("Maciej"));
 
 		// when
-		list.remove(new Person("Damian"));
+		int result = list.remove(new Person("Damian"));
 
 		// then
+		assertFalse(list.contains(new Person("Damian")));
+		assertTrue(list.contains(new Person("Maciej")));
+		assertEquals(-1, result);
 		assertEquals(1, list.size());
 	}
 
@@ -164,9 +223,40 @@ public class ListTest {
 		list.add(new Person("Maciej"));
 
 		// when
-		list.remove(new Person("Maciej"));
+		int result = list.remove(new Person("Maciej"));
 
 		// then
+		assertEquals(0, result);
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void removeObjectAfterAddingNull() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Mateusz");
+		list.add(null);
+
+		// when
+		int result = list.remove(person);
+
+		// then
+		assertEquals(-1, result);
+		assertTrue(list.contains(null));
+		assertFalse(list.contains(person));
+	}
+
+	@Test
+	public void removeNullAfterAddingNull() {
+		// given
+		List<Person> list = new List<>();
+		list.add(null);
+
+		// when
+		int result = list.remove(null);
+
+		// then
+		assertEquals(0, result);
 		assertEquals(0, list.size());
 	}
 
