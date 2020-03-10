@@ -62,6 +62,7 @@ public class List<E> {
 		}
 		if (size == 1) {
 			if (Objects.equals(walking.value, value)) {
+				last = null;
 				size--;
 				return 0;
 			}

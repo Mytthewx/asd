@@ -101,22 +101,24 @@ public class ListTest {
 		assertEquals(0, list.size());
 	}
 
-//	@Test
-//	public void removePersonAfterAddingPersonAndBeforeAddingSecondPerson() {
-//		// given
-//		List<Person> list = new List<>();
-//		Person person = new Person("Mateusz");
-//		Person person2 = new Person("Andrzej");
-//		list.add(person);
-//
-//
-//		// when
-//		list.remove(person);
-//		list.add(person2);
-//
-//		// then
-//		assertFalse(list.contains(person));
-//	}
+	@Test
+	public void removePersonAfterAddingPersonAndBeforeAddingSecondPerson() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Mateusz");
+		Person person2 = new Person("Andrzej");
+		list.add(person);
+
+		// when
+		list.remove(person);
+		list.add(person2);
+
+		// then
+		assertFalse(list.contains(person));
+		assertTrue(list.contains(person2));
+		assertEquals(1, list.size());
+		assertFalse(list.contains(null));
+	}
 
 	@Test
 	public void removePersonWithIndex() {
