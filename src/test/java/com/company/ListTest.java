@@ -260,7 +260,9 @@ public class ListTest {
 		// then
 		assertEquals(0, result);
 		assertEquals(0, list.size());
+		assertFalse(list.contains(null));
 	}
+
 
 	@Test
 	public void sizeWithSomeObjects() {

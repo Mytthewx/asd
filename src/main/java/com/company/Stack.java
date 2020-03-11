@@ -25,6 +25,12 @@ public class Stack<E> {
 		}
 	}
 
+	public E get() {
+		Node walking = top;
+		counter--;
+		return null;
+	}
+
 	public void add(E value) {
 		Node node = new Node(value);
 		node.setPrev(top);
@@ -36,6 +42,22 @@ public class Stack<E> {
 		return counter;
 	}
 
+	public void clear() {
+		top = null;
+		counter = 0;
+	}
+
+	@Override
+	public int hashCode() {
+		Node walking = top;
+		int prime = 3;
+		int result = 1;
+		while (walking != null) {
+			result = prime * result + (walking.hashCode());
+			walking = walking.getPrev();
+		}
+		return result;
+	}
 
 	@Override
 	public String toString() {
