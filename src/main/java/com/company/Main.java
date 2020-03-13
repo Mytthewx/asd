@@ -7,10 +7,15 @@ public class Main {
 		Person person = new Person("Mateusz");
 		Person person2 = new Person("Damian");
 		Person person3 = new Person("Marek");
-		stack.add(person);
-		stack.add(person2);
-		stack.add(person3);
+		stack.put(person);
+		System.out.println(stack.size());
+		stack.put(person2);
+		System.out.println(stack.size());
+		stack.put(person3);
+		System.out.println(stack.size());
 		System.out.println("Stack: " + stack);
+		System.out.println("Top element in a stack: " + stack.pop());
+		System.out.println("Is " + person.toString() + " in stack?: " + stack.contains(person));
 		stack.clear();
 		System.out.println("Stack after clear: " + stack);
 	}

@@ -4,9 +4,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 public class Stack<E> {
 	private Node top;
-	private int counter;
+	private int size;
 
 	@Getter
 	@Setter
@@ -25,26 +28,46 @@ public class Stack<E> {
 		}
 	}
 
-	public E get() {
-		Node walking = top;
-		counter--;
-		return null;
+	public E pop() {
+		if (size == 0) {
+			throw new NoSuchElementException("Can't find an element.");
+		}
+		E flag = top.getValue();
+		top = top.prev;
+		size--;
+		return flag;
 	}
 
-	public void add(E value) {
+	public void put(E value) {
 		Node node = new Node(value);
 		node.setPrev(top);
 		top = node;
-		counter++;
+		size++;
+	}
+
+	public boolean contains(E value) {
+		Node walking = top;
+		int counter = size - 1;
+		if (size() <= 0) {
+			return false;
+		}
+		while (counter >= 0) {
+			if (Objects.equals(walking.value, value)) {
+				return true;
+			}
+			walking = walking.prev;
+			counter--;
+		}
+		return false;
 	}
 
 	public int size() {
-		return counter;
+		return size;
 	}
 
 	public void clear() {
 		top = null;
-		counter = 0;
+		size = 0;
 	}
 
 	@Override
