@@ -69,7 +69,7 @@ public class List<E> {
 			return -1;
 		}
 		int counter = size - 1;
-		while (counter >= 0) {
+		while (walking.prev != null) {
 			if (Objects.equals(walking.prev.value, value)) {
 				walking.prev = walking.prev.prev;
 				size--;

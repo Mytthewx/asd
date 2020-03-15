@@ -2,6 +2,7 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
@@ -207,6 +208,42 @@ public class StackTest {
 	}
 
 	@Test
+	public void peekObjectFromStack() {
+		// given
+		Stack<Person> stack = new Stack<>();
+		Person person = new Person("Mateusz");
+		stack.put(null);
+		stack.put(person);
+
+		// when
+		Person result = stack.peek();
+
+		// then
+		assertEquals(person, result);
+		assertEquals(2, stack.size());
+		assertTrue(stack.contains(person));
+	}
+
+	@Test(expected = NoSuchElementException.class)
+	public void peekNonExistentObjectFromStack() {
+		// given
+		Stack<Person> stack = new Stack<>();
+		Person person = new Person("Mateusz");
+		stack.put(null);
+		stack.put(person);
+
+		// when
+		Person result = stack.pop();
+		stack.pop();
+		stack.peek();
+
+		// then
+		assertEquals(person, result);
+		assertEquals(0, stack.size());
+		assertFalse(stack.contains(person));
+	}
+
+	@Test
 	public void sizeAfterAddingThreeObjects() {
 		// given
 		Stack<Person> stack = new Stack<>();
@@ -348,5 +385,54 @@ public class StackTest {
 		// then
 		assertEquals(0, stack.size());
 		assertFalse(stack.contains(person));
+	}
+
+	@Test
+	public void hashCodeTest() {
+		// given
+		HashSet<Stack<Person>> hashSet = new HashSet<>();
+		Stack<Person> stack1 = new Stack();
+		Stack<Person> stack2 = new Stack();
+		Stack<Person> stack3 = new Stack();
+		stack1.put(new Person("Maciej"));
+		stack2.put(new Person("Dariusz"));
+		stack3.put(new Person("Pawel"));
+		hashSet.add(stack1);
+		hashSet.add(stack2);
+		hashSet.add(stack3);
+
+		// when
+		int result = hashSet.size();
+
+		// then
+		assertEquals(3, result);
+	}
+
+	@Test
+	public void toStringTest() {
+		// given
+		Stack<Person> stack = new Stack<>();
+		stack.put(new Person("Mateusz"));
+
+		// when
+		String result = stack.toString();
+
+		// then
+		assertEquals("Person(name=Mateusz)", result);
+	}
+
+	@Test
+	public void testToStringGetAndSize() {
+		// given
+		Stack<Person> stack = new Stack<>();
+		Person person = new Person("Maciej");
+
+		// when
+		stack.put(person);
+
+		// then
+		assertEquals("Person(name=Maciej)", stack.toString());
+		assertEquals(person, stack.pop());
+		assertEquals(0, stack.size());
 	}
 }

@@ -14,7 +14,8 @@ public class Main {
 		stack.put(person3);
 		System.out.println(stack.size());
 		System.out.println("Stack: " + stack);
-		System.out.println("Top element in a stack: " + stack.pop());
+		System.out.println("Top element in a stack: " + stack.peek());
+		System.out.println("Delete top element in a stack: " + stack.peek() + " - deleted.");
 		System.out.println("Is " + person.toString() + " in stack?: " + stack.contains(person));
 		stack.clear();
 		System.out.println("Stack after clear: " + stack);

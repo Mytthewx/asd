@@ -263,6 +263,61 @@ public class ListTest {
 		assertFalse(list.contains(null));
 	}
 
+	@Test
+	public void removeObjectFromListWithSizeZero() {
+		// given
+		List<Person> list = new List<>();
+
+		// when
+		int result = list.remove(null);
+
+		// then
+		assertEquals(0, result);
+		assertEquals(0, list.size());
+		assertFalse(list.contains(null));
+	}
+
+	@Test
+	public void removeObjectFromList() {
+		// given
+		List<Person> list = new List<>();
+		Person person1 = new Person("Mateusz");
+		Person person2 = new Person("Marcin");
+		Person person3 = new Person("Damian");
+		Person person4 = new Person("Andrzej");
+		list.add(person1);
+		list.add(person2);
+		list.add(person3);
+		list.add(person4);
+
+		// when
+		int result = list.remove(person2);
+
+		// then
+		assertEquals(1, result);
+		assertEquals(3, list.size());
+		assertFalse(list.contains(person2));
+		assertTrue(list.contains(person1));
+		assertTrue(list.contains(person3));
+		assertTrue(list.contains(person4));
+	}
+
+	@Test
+	public void removeNonExistObjectFromList() {
+		// given
+		List<Person> list = new List<>();
+		Person person = new Person("Mateusz");
+		Person person2 = new Person("Damian");
+		list.add(person);
+		list.add(person2);
+
+		// when
+		int result = list.remove(null);
+
+		// then
+		assertEquals(-1, result);
+	}
+
 
 	@Test
 	public void sizeWithSomeObjects() {

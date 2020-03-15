@@ -38,6 +38,13 @@ public class Stack<E> {
 		return flag;
 	}
 
+	public E peek() {
+		if (size == 0) {
+			throw new NoSuchElementException("Can't find an element.");
+		}
+		return top.getValue();
+	}
+
 	public void put(E value) {
 		Node node = new Node(value);
 		node.setPrev(top);
