@@ -15,7 +15,6 @@ public class List<E> {
 	@EqualsAndHashCode
 	private class Node {
 		private Node prev;
-		private Node next;
 		private E value;
 
 		public Node(E value) {
@@ -27,6 +26,13 @@ public class List<E> {
 		public String toString() {
 			return String.valueOf(value);
 		}
+	}
+
+	public void add(E value) {
+		Node node = new Node(value);
+		node.setPrev(last);
+		last = node;
+		size++;
 	}
 
 	public E get(int i) {
@@ -80,13 +86,6 @@ public class List<E> {
 			counter--;
 		}
 		return -1;
-	}
-
-	public void add(E value) {
-		Node node = new Node(value);
-		node.setPrev(last);
-		last = node;
-		size++;
 	}
 
 	public void set(int i, E value) {

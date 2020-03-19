@@ -28,6 +28,13 @@ public class Stack<E> {
 		}
 	}
 
+	public void put(E value) {
+		Node node = new Node(value);
+		node.setPrev(top);
+		top = node;
+		size++;
+	}
+
 	public E pop() {
 		if (size == 0) {
 			throw new NoSuchElementException("Can't find an element.");
@@ -43,13 +50,6 @@ public class Stack<E> {
 			throw new NoSuchElementException("Can't find an element.");
 		}
 		return top.getValue();
-	}
-
-	public void put(E value) {
-		Node node = new Node(value);
-		node.setPrev(top);
-		top = node;
-		size++;
 	}
 
 	public boolean contains(E value) {
