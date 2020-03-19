@@ -43,6 +43,81 @@ public class Map<K, V> {
 		return null;
 	}
 
+	public void remove(K key) {
+		Node walking = last;
+		while (walking != null) {
+			if (Objects.equals(walking.key, key)) {
+				walking.key = null;
+				walking.value = null;
+			}
+			walking = walking.prev;
+		}
+	}
+
+	public boolean containsKey(K key) {
+		Node walking = last;
+		if (size() == 0) {
+			return false;
+		}
+		do {
+			if (Objects.equals(walking.key, key)) {
+				return true;
+			}
+			walking = walking.getPrev();
+		} while (walking != null);
+		return false;
+	}
+
+	public boolean containsValue(V value) {
+		Node walking = last;
+		if (size() == 0) {
+			return false;
+		}
+		do {
+			if (Objects.equals(walking.value, value)) {
+				return true;
+			}
+			walking = walking.getPrev();
+		} while (walking != null);
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Map<K, V> map = (Map<K, V>) o;
+		if (size() != map.size()) {
+			return false;
+		}
+		Node walking = last;
+		Node walking2 = map.last;
+		while (walking != null) {
+			if (!walking.equals(walking2)) {
+				return false;
+			}
+			walking = walking.getPrev();
+			walking2 = walking2.getPrev();
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		Node walking = last;
+		int prime = 3;
+		int result = 1;
+		while (walking != null) {
+			result = prime * result + (walking.hashCode());
+			walking = walking.getPrev();
+		}
+		return result;
+	}
+
 	public int size() {
 		return size;
 	}
