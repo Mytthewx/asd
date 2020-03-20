@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class MapTest {
@@ -23,7 +24,7 @@ public class MapTest {
 	}
 
 	@Test
-	public void addObjectAndNull() {
+	public void addObjectAndAddNull() {
 		// given
 		Map<Person, Integer> map = new Map<>();
 
@@ -39,6 +40,7 @@ public class MapTest {
 		assertTrue(map.containsKey(new Person("Mateusz")));
 		assertFalse(map.containsKey(new Person("Andrzej")));
 	}
+
 
 	@Test
 	public void getObjectAfterAddSomeObjects() {
@@ -57,6 +59,19 @@ public class MapTest {
 		// then
 		assertEquals(3, map.size());
 		assertEquals(25, result);
+	}
+
+	@Test
+	public void getNonExistObject() {
+		// given
+		Map<Person, Integer> map = new Map<>();
+		Person person = new Person("Mateusz");
+
+		// when
+		Integer result = map.get(person);
+
+		// then
+		assertNull(result);
 	}
 
 	@Test

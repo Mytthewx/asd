@@ -34,6 +34,9 @@ public class Map<K, V> {
 
 	public V get(K key) {
 		Node walking = last;
+		if (size == 0) {
+			return null;
+		}
 		while (walking != null) {
 			if (Objects.equals(walking.key, key)) {
 				return walking.value;
