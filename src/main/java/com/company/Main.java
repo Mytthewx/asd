@@ -10,15 +10,11 @@ public class Main {
 		map.add(person, 23);
 		map.add(person2, 25);
 		map.add(person3, 22);
-		map.remove(person3);
 		System.out.println(person.toString() + " = " + map.get(person));
 		System.out.println(person2.toString() + " = " + map.get(person2));
 		System.out.println(person3.toString() + " = " + map.get(person3));
-		System.out.println(map.containsValue(22));
-		System.out.println(map.containsValue(25));
-		System.out.println(map.containsValue(23));
-		System.out.println(map.containsKey(person));
-		System.out.println(map.containsKey(person3));
-		System.out.println(map.containsKey(person2));
+		System.out.println(map.keySet());
+		System.out.println(map.valueSet());
+		System.out.println(map.nodeSet());
 	}
 }
