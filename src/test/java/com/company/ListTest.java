@@ -553,8 +553,8 @@ public class ListTest {
 	@Test
 	public void equalMethodWithSameObjects() {
 		// given
-		List<Person> list1 = new List();
-		List<Person> list2 = new List();
+		List<Person> list1 = new List<>();
+		List<Person> list2 = new List<>();
 		Person person = new Person("Dawid");
 		list1.add(person);
 		list2.add(person);
@@ -569,8 +569,8 @@ public class ListTest {
 	@Test
 	public void equalMethodWithDifferentObjects() {
 		// given
-		List<Person> list1 = new List();
-		List<Person> list2 = new List();
+		List<Person> list1 = new List<>();
+		List<Person> list2 = new List<>();
 		Person person1 = new Person("Maciek");
 		Person person2 = new Person("Darek");
 		Person person3 = new Person("Mariusz");
@@ -591,8 +591,8 @@ public class ListTest {
 	@Test
 	public void equalMethodWithDifferentSize() {
 		// given
-		List<Person> list1 = new List();
-		List<Person> list2 = new List();
+		List<Person> list1 = new List<>();
+		List<Person> list2 = new List<>();
 		Person person1 = new Person("Maciek");
 		Person person2 = new Person("Dariusz");
 		list1.add(person1);
@@ -609,7 +609,7 @@ public class ListTest {
 	@Test
 	public void equalThis() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 
 		// when
 		boolean result = list.equals(list);
@@ -621,7 +621,7 @@ public class ListTest {
 	@Test
 	public void equalsNull() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 
 		// when
 		boolean result = list.equals(null);
@@ -633,7 +633,7 @@ public class ListTest {
 	@Test
 	public void clearTest() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 		list.add(new Person("Maciej"));
 		list.add(new Person("Dariusz"));
 		list.add(new Person("Arkadiusz"));
@@ -648,7 +648,7 @@ public class ListTest {
 	@Test
 	public void clearWithNull() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 		list.add(null);
 		list.add(null);
 		list.add(null);
@@ -663,7 +663,7 @@ public class ListTest {
 	@Test
 	public void clearEmptyList() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 
 		// when
 		list.clear();
@@ -676,9 +676,9 @@ public class ListTest {
 	public void hashCodeTest() {
 		// given
 		HashSet<List> hashSet = new HashSet<>();
-		List<Person> list = new List();
-		List<Person> list1 = new List();
-		List<Person> list2 = new List();
+		List<Person> list = new List<>();
+		List<Person> list1 = new List<>();
+		List<Person> list2 = new List<>();
 		list.add(new Person("Maciej"));
 		list1.add(new Person("Dariusz"));
 		list2.add(new Person("Pawel"));
@@ -696,7 +696,7 @@ public class ListTest {
 	@Test
 	public void toStringTest() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 		list.add(new Person("Mateusz"));
 
 		// when
@@ -709,7 +709,7 @@ public class ListTest {
 	@Test
 	public void testToStringGetAndSize() {
 		// given
-		List<Person> list = new List();
+		List<Person> list = new List<>();
 		Person person = new Person("Maciej");
 
 		// when

@@ -3,48 +3,59 @@ package com.company;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
+@ToString
 public class Map<K, V> {
-	private Node<K, V> last;
+	private Node last;
 	private int size;
 
 	@Getter
-	@Setter
 	@EqualsAndHashCode
 	@ToString
-	protected class Node<K, V> {
-		private Node<K, V> prev;
+	protected class Node {
+		private Node prev;
+		private Entry<K, V> entry;
+
+		public Node(K key, V value) {
+			entry = new Entry<>(key, value);
+		}
+	}
+
+
+	@Getter
+	@EqualsAndHashCode
+	@ToString
+	public static class Entry<K, V> {
 		private K key;
 		private V value;
 
-		public Node(K key, V value) {
+		public Entry(K key, V value) {
 			this.key = key;
 			this.value = value;
 		}
 	}
 
 	public void add(K key, V value) {
-		Node<K, V> node = new Node<>(key, value);
+		Node node = new Node(key, value);
 		node.prev = last;
 		last = node;
 		size++;
 	}
 
 	public V get(K key) {
-		Node<K, V> walking = last;
+		Node walking = last;
 		if (size == 0) {
 			return null;
 		}
 		while (walking != null) {
-			if (Objects.equals(walking.key, key)) {
-				return walking.value;
+			if (Objects.equals(walking.entry.key, key)) {
+				return walking.entry.value;
 			}
 			walking = walking.prev;
 		}
@@ -52,11 +63,11 @@ public class Map<K, V> {
 	}
 
 	public boolean remove(K key) {
-		Node<K, V> walking = last;
+		Node walking = last;
 		while (walking != null) {
-			if (Objects.equals(walking.key, key)) {
-				walking.key = null;
-				walking.value = null;
+			if (Objects.equals(walking.entry.key, key)) {
+				walking.entry.key = null;
+				walking.entry.value = null;
 				size--;
 				return true;
 			}
@@ -66,12 +77,12 @@ public class Map<K, V> {
 	}
 
 	public boolean containsKey(K key) {
-		Node<K, V> walking = last;
+		Node walking = last;
 		if (size() == 0) {
 			return false;
 		}
 		do {
-			if (Objects.equals(walking.key, key)) {
+			if (Objects.equals(walking.entry.key, key)) {
 				return true;
 			}
 			walking = walking.getPrev();
@@ -80,12 +91,12 @@ public class Map<K, V> {
 	}
 
 	public boolean containsValue(V value) {
-		Node<K, V> walking = last;
+		Node walking = last;
 		if (size() == 0) {
 			return false;
 		}
 		do {
-			if (Objects.equals(walking.value, value)) {
+			if (Objects.equals(walking.entry.value, value)) {
 				return true;
 			}
 			walking = walking.getPrev();
@@ -94,33 +105,33 @@ public class Map<K, V> {
 	}
 
 	Set<K> keySet() {
-		Node<K, V> walking = last;
+		Node walking = last;
 		Set<K> keys = new HashSet<>();
 		do {
-			keys.add(walking.key);
+			keys.add(walking.entry.key);
 			walking = walking.prev;
 		} while (walking != null);
 		return keys;
 	}
 
 	Set<V> valueSet() {
-		Node<K, V> walking = last;
-		Set<V> values = new LinkedHashSet<>();
+		Node walking = last;
+		Set<V> values = new HashSet<>();
 		do {
-			values.add(walking.value);
+			values.add(walking.entry.value);
 			walking = walking.prev;
 		} while (walking != null);
 		return values;
 	}
 
-	Set<Node<K, V>> nodeSet() {
-		Node<K, V> walking = last;
-		Set<Node<K, V>> nodes = new LinkedHashSet<>();
+	Set<Entry<K, V>> entrySet() {
+		Node walking = last;
+		Set<Entry<K, V>> entries = new HashSet<>();
 		do {
-			nodes.add(walking);
+			entries.add(walking.entry);
 			walking = walking.prev;
 		} while (walking != null);
-		return nodes;
+		return entries;
 	}
 
 	@Override
@@ -135,8 +146,8 @@ public class Map<K, V> {
 		if (size() != map.size()) {
 			return false;
 		}
-		Node<K, V> walking = last;
-		Node<K, V> walking2 = map.last;
+		Node walking = last;
+		Node walking2 = map.last;
 		while (walking != null) {
 			if (!walking.equals(walking2)) {
 				return false;
@@ -153,7 +164,7 @@ public class Map<K, V> {
 
 	@Override
 	public int hashCode() {
-		Node<K, V> walking = last;
+		Node walking = last;
 		int prime = 3;
 		int result = 1;
 		while (walking != null) {
@@ -161,5 +172,16 @@ public class Map<K, V> {
 			walking = walking.getPrev();
 		}
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		Node walking = last;
+		while (walking != null) {
+			s.append(walking);
+			walking = walking.prev;
+		}
+		return s.toString();
 	}
 }

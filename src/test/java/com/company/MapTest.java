@@ -228,6 +228,29 @@ public class MapTest {
 	}
 
 	@Test
+	public void equalsNullTest() {
+		// given
+		Map<Person, Integer> map = new Map<>();
+		Map<Person, Integer> map2 = new Map<>();
+		Person person1 = new Person("Mateusz");
+		map.add(person1, 23);
+		map2.add(person1, 24);
+
+
+		// when
+		boolean result = map.equals(null);
+
+		// then
+		assertEquals(1, map.size());
+		assertEquals(1, map2.size());
+		assertFalse(result);
+		assertTrue(map.containsKey(person1));
+		assertTrue(map.containsValue(23));
+		assertTrue(map2.containsKey(person1));
+		assertTrue(map2.containsValue(24));
+	}
+
+	@Test
 	public void containsKeyTestWithSizeZero() {
 		// given
 		Map<Person, Integer> map = new Map<>();
@@ -426,19 +449,36 @@ public class MapTest {
 		assertEquals(3, map.size());
 	}
 
-//	@Test
-//	public void nodeSetTest() {
-//		// given
-//		Map<Person, Integer> map = new Map<>();
-//		Person person = new Person("Mateusz");
-//		Person person2 = new Person("Marcin");
-//		Person person3 = new Person("Andrzej");
-//		map.add(person, 23);
-//		map.add(person2, 25);
-//		map.add(person3, 22);
-//
-//		// when
-//
-//		// then
-//	}
+	@Test
+	public void entrySetTest() {
+		// given
+		Map<Person, Integer> map = new Map<>();
+		Person person = new Person("Mateusz");
+		Person person2 = new Person("Damian");
+		Map.Entry<Person, Integer> entry = new Map.Entry<>(person, 23);
+		Map.Entry<Person, Integer> entry2 = new Map.Entry<>(person2, 24);
+		map.add(person, 23);
+		map.add(person2, 24);
+
+		// when
+		Set<Map.Entry<Person, Integer>> result = map.entrySet();
+
+		// then
+		assertTrue(result.contains(entry));
+		assertTrue(result.contains(entry2));
+		assertEquals(2, result.size());
+	}
+
+	@Test
+	public void toStringTest() {
+		// given
+		Map<Person, Integer> map = new Map<>();
+		map.add(new Person("Mateusz"), 23);
+
+		// when
+		String result = map.toString();
+
+		// then
+		assertEquals("Map.Node(prev=null, entry=Map.Entry(key=Person(name=Mateusz), value=23))", result);
+	}
 }
