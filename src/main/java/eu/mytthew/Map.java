@@ -1,4 +1,4 @@
-package com.company;
+package eu.mytthew;
 
 
 import lombok.EqualsAndHashCode;
