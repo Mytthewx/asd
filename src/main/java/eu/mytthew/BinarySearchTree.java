@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Objects;
+
 @ToString
 public class BinarySearchTree {
 	private Node root;
@@ -41,24 +43,43 @@ public class BinarySearchTree {
 					walking.right = inserting;
 					return;
 				}
-				walking.right = walking;
+				walking = walking.right;
 			} else if (walking.value > inserting.value) {
 				if (walking.left == null) {
 					walking.left = inserting;
 					return;
 				}
-				walking.left = walking;
+				walking = walking.left;
 			}
 		}
 	}
 
 	public void display() {
-		Node walking = root;
-		while (walking != null) {
-			walking = walking.left;
-			System.out.println(walking.value);
+		display(root);
+	}
+
+	public void display(Node node) {
+		if (node.left != null) {
+			display(node.left);
+		}
+		System.out.println(node.value);
+		if (node.right != null) {
+			display(node.right);
 		}
 	}
 
-
+	public boolean contains(int value) {
+		Node walking = root;
+		while (walking != null) {
+			if (Objects.equals(walking.value, value)) {
+				return true;
+			}
+			if (walking.value < value) {
+				walking = walking.right;
+			} else {
+				walking = walking.left;
+			}
+		}
+		return false;
+	}
 }
