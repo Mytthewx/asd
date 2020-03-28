@@ -82,4 +82,26 @@ public class BinarySearchTree {
 		}
 		return false;
 	}
+
+	public boolean remove(int value) {
+		Node walking = root;
+		Node parent = root;
+		while (walking != null) {
+			if (Objects.equals(walking.value, value)) {
+				if (walking.value > parent.value) {
+					return true;
+				}
+				if (walking.value < parent.value) {
+					parent = walking.right;
+					return true;
+				}
+			}
+			if (walking.value < value) {
+				walking = walking.right;
+			} else {
+				walking = walking.left;
+			}
+		}
+		return false;
+	}
 }

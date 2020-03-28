@@ -11,8 +11,7 @@ public class Main {
 		bst.add(5);
 		bst.add(11);
 		bst.display();
-		for (int i = 1; i <= 12; i++) {
-			System.out.println("" + i + " " + bst.contains(i));
-		}
+		System.out.println(bst.remove(7));
+		bst.display();
 	}
 }
