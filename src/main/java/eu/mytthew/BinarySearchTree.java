@@ -86,19 +86,29 @@ public class BinarySearchTree {
 	public boolean remove(int value) {
 		Node walking = root;
 		Node parent = root;
+		Node current;
 		while (walking != null) {
 			if (Objects.equals(walking.value, value)) {
-				if (walking.value > parent.value) {
+				if (parent.value < value) {
+					current = parent.right;
+					while (walking.left != null) {
+						walking = walking.left;
+					}
+					parent.right = walking;
 					return true;
 				}
-				if (walking.value < parent.value) {
-					parent = walking.right;
+				if (parent.value > value) {
+					current = walking.left;
+					parent.left = walking.right;
+					parent.left.left = current;
 					return true;
 				}
 			}
 			if (walking.value < value) {
+				parent = walking;
 				walking = walking.right;
 			} else {
+				parent = walking;
 				walking = walking.left;
 			}
 		}

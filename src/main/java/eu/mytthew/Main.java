@@ -5,13 +5,15 @@ public class Main {
 		BinarySearchTree bst = new BinarySearchTree();
 		bst.add(9);
 		bst.add(7);
-		bst.add(10);
+		bst.add(13);
 		bst.add(6);
 		bst.add(8);
 		bst.add(5);
+		bst.add(14);
+		bst.add(12);
 		bst.add(11);
 		bst.display();
-		System.out.println(bst.remove(7));
+		System.out.println("Is " + 7 + " removed? " + bst.remove(13));
 		bst.display();
 	}
 }
