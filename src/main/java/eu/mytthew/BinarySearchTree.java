@@ -86,11 +86,9 @@ public class BinarySearchTree {
 	public boolean remove(int value) {
 		Node walking = root;
 		Node parent = root;
-		Node current;
 		while (walking != null) {
 			if (Objects.equals(walking.value, value)) {
 				if (parent.value < value) {
-					current = parent.right;
 					while (walking.left != null) {
 						walking = walking.left;
 					}
@@ -98,9 +96,7 @@ public class BinarySearchTree {
 					return true;
 				}
 				if (parent.value > value) {
-					current = walking.left;
 					parent.left = walking.right;
-					parent.left.left = current;
 					return true;
 				}
 			}
@@ -114,4 +110,21 @@ public class BinarySearchTree {
 		}
 		return false;
 	}
+
+	public Node removeMax(int value) {
+		Node walking = root;
+		while (walking != null) {
+			if (Objects.equals(walking.value, value)) {
+				walking = walking.right;
+				return walking;
+			}
+			if (walking.value < value) {
+				walking = walking.right;
+			} else {
+				walking = walking.left;
+			}
+		}
+		return null;
+	}
+
 }
