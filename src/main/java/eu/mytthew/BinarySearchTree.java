@@ -14,7 +14,7 @@ public class BinarySearchTree {
 	@Getter
 	@Setter
 	@EqualsAndHashCode
-	private class Node {
+	protected static class Node {
 		private int value;
 		private Node left;
 		private Node right;
@@ -111,14 +111,41 @@ public class BinarySearchTree {
 		return false;
 	}
 
-	public Node removeMax(int value) {
+	public Node removeMin(Node node) {
 		Node walking = root;
+		Node minValue = null;
 		while (walking != null) {
-			if (Objects.equals(walking.value, value)) {
-				walking = walking.right;
-				return walking;
+			if (Objects.equals(walking.value, node.value)) {
+				while (walking.left == null) {
+					if (walking.right == null) {
+						return null;
+					}
+					walking = walking.right;
+				}
+				while (walking.left != null) {
+					walking = walking.left;
+					minValue = walking;
+				}
+				return minValue;
 			}
-			if (walking.value < value) {
+			if (walking.value < node.value) {
+				walking = walking.right;
+			} else {
+				walking = walking.left;
+			}
+		}
+		return null;
+	}
+
+	public Node removeMax(Node node) {
+		Node walking = root;
+		Node maxValue;
+		while (walking != null) {
+			if (Objects.equals(walking.value, node.value)) {
+				maxValue = walking.right;
+				return maxValue;
+			}
+			if (walking.value < node.value) {
 				walking = walking.right;
 			} else {
 				walking = walking.left;
