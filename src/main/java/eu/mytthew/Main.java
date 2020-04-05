@@ -3,7 +3,7 @@ package eu.mytthew;
 
 public class Main {
 	public static void main(String[] args) {
-		BinarySearchTree bst = new BinarySearchTree();
+		BinarySearchTree<Integer> bst = new BinarySearchTree<>();
 		bst.add(9);
 		bst.add(7);
 		bst.add(8);

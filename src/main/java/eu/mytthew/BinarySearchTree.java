@@ -8,18 +8,18 @@ import lombok.ToString;
 import java.util.Objects;
 
 @ToString
-public class BinarySearchTree {
+public class BinarySearchTree<E extends Comparable<E>> {
 	private Node root;
 
 	@Getter
 	@Setter
 	@EqualsAndHashCode
-	protected static class Node {
-		private int value;
+	protected class Node {
+		private E value;
 		private Node left;
 		private Node right;
 
-		public Node(int value) {
+		public Node(E value) {
 			this.value = value;
 		}
 
@@ -30,7 +30,7 @@ public class BinarySearchTree {
 		}
 	}
 
-	public void add(int value) {
+	public void add(E value) {
 		Node inserting = new Node(value);
 		if (root == null) {
 			root = inserting;
@@ -38,13 +38,13 @@ public class BinarySearchTree {
 		}
 		Node walking = root;
 		while (true) {
-			if (walking.value < inserting.value) {
+			if (walking.value != null && walking.value.compareTo(inserting.value) < 0) {
 				if (walking.right == null) {
 					walking.right = inserting;
 					return;
 				}
 				walking = walking.right;
-			} else if (walking.value > inserting.value) {
+			} else if (walking.value != null && walking.value.compareTo(inserting.value) > 0) {
 				if (walking.left == null) {
 					walking.left = inserting;
 					return;
@@ -71,13 +71,13 @@ public class BinarySearchTree {
 		}
 	}
 
-	public boolean contains(int value) {
+	public boolean contains(E value) {
 		Node walking = root;
 		while (walking != null) {
 			if (Objects.equals(walking.value, value)) {
 				return true;
 			}
-			if (walking.value < value) {
+			if (walking.value.compareTo(value) < 0) {
 				walking = walking.right;
 			} else {
 				walking = walking.left;
@@ -87,7 +87,7 @@ public class BinarySearchTree {
 	}
 
 
-	public boolean remove(int value) {
+	public boolean remove(E value) {
 		if (root == null) {
 			return false;
 		}
@@ -162,7 +162,7 @@ public class BinarySearchTree {
 					return true;
 				}
 			}
-			if (walking.value < value) {
+			if (walking.value != null && walking.value.compareTo(value) < 0) {
 				walking = walking.right;
 			} else {
 				walking = walking.left;
@@ -179,7 +179,7 @@ public class BinarySearchTree {
 				maxValue = walking.right;
 				return maxValue;
 			}
-			if (walking.value < node.value) {
+			if (walking.value.compareTo(node.value) < 0) {
 				walking = walking.right;
 			} else {
 				walking = walking.left;
@@ -209,7 +209,7 @@ public class BinarySearchTree {
 				parent.left = null;
 				return minValue;
 			}
-			if (walking.value < node.value) {
+			if (walking.value.compareTo(node.value) < 0) {
 				parent = walking;
 				walking = walking.right;
 			} else {
