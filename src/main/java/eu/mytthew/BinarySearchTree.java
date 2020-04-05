@@ -55,16 +55,19 @@ public class BinarySearchTree {
 	}
 
 	public void display() {
-		display(root);
+		if (root == null) {
+			return;
+		}
+		display(root, "");
 	}
 
-	public void display(Node node) {
+	public void display(Node node, String string) {
 		if (node.left != null) {
-			display(node.left);
+			display(node.left, string + "\t");
 		}
-		System.out.println(node.value);
+		System.out.println(string + node.value);
 		if (node.right != null) {
-			display(node.right);
+			display(node.right, string + "\t");
 		}
 	}
 
@@ -83,58 +86,89 @@ public class BinarySearchTree {
 		return false;
 	}
 
+
 	public boolean remove(int value) {
+		if (root == null) {
+			return false;
+		}
+		if (Objects.equals(root.value, value)) {
+			Node right = root.right;
+			root = root.left;
+			root.right = right;
+		}
 		Node walking = root;
-		Node parent = root;
 		while (walking != null) {
-			if (Objects.equals(walking.value, value)) {
-				if (parent.value < value) {
-					while (walking.left != null) {
-						walking = walking.left;
-					}
-					parent.right = walking;
+			if (walking.right != null && Objects.equals(walking.right.value, value)) {
+				if (walking.right.right == null && walking.right.left == null) {
+					walking.right = null;
 					return true;
 				}
-				if (parent.value > value) {
-					parent.left = walking.right;
+				if (walking.right.right == null) {
+					walking.right = walking.right.left;
+					return true;
+				}
+				if (walking.right.left == null) {
+					Node min = removeMin(walking.right.right);
+					if (min == null) {
+						walking.right = walking.right.right;
+					} else {
+						walking.right = min;
+					}
+					return true;
+				} else {
+					Node min = removeMin(walking.right.right);
+					Node left = walking.right.left;
+					Node right = walking.right.right;
+					if (min == null) {
+						walking.right = walking.right.right;
+						walking.right.left = left;
+					} else {
+						walking.right = min;
+						walking.right.left = left;
+						walking.right.right = right;
+					}
+					return true;
+				}
+			}
+			if (walking.left != null && Objects.equals(walking.left.value, value)) {
+				if (walking.left.right == null && walking.left.left == null) {
+					walking.left = null;
+					return true;
+				}
+				if (walking.left.right == null) {
+					walking.left = walking.left.left;
+					return true;
+				}
+				if (walking.left.left == null) {
+					Node min = removeMin(walking.left.right);
+					if (min == null) {
+						walking.left = walking.left.right;
+					} else {
+						walking.left = min;
+					}
+					return true;
+				} else {
+					Node min = removeMin(walking.left.right);
+					Node left = walking.left.left;
+					Node right = walking.left.right;
+					if (min == null) {
+						walking.left = walking.left.right;
+						walking.left.left = left;
+					} else {
+						walking.left = min;
+						walking.left.left = left;
+						walking.left.right = right;
+					}
 					return true;
 				}
 			}
 			if (walking.value < value) {
-				parent = walking;
 				walking = walking.right;
 			} else {
-				parent = walking;
 				walking = walking.left;
 			}
 		}
 		return false;
-	}
-
-	public Node removeMin(Node node) {
-		Node walking = root;
-		Node minValue = null;
-		while (walking != null) {
-			if (Objects.equals(walking.value, node.value)) {
-				while (walking.left == null) {
-					if (walking.right == null) {
-						return null;
-					}
-					walking = walking.right;
-				}
-				while (walking.left != null) {
-					walking = walking.left;
-					minValue = walking;
-				}
-				return minValue;
-			}
-			if (walking.value < node.value) {
-				walking = walking.right;
-			} else {
-				walking = walking.left;
-			}
-		}
-		return null;
 	}
 
 	public Node removeMax(Node node) {
@@ -153,5 +187,38 @@ public class BinarySearchTree {
 		}
 		return null;
 	}
+
+
+	public Node removeMin(Node node) {
+		Node walking = root;
+		Node minValue = null;
+		Node parent = walking;
+		while (walking != null) {
+			if (Objects.equals(walking.value, node.value)) {
+				while (walking.left == null) {
+					if (walking.right == null) {
+						return null;
+					}
+					walking = walking.right;
+				}
+				while (walking.left != null) {
+					parent = walking;
+					walking = walking.left;
+					minValue = walking;
+				}
+				parent.left = null;
+				return minValue;
+			}
+			if (walking.value < node.value) {
+				parent = walking;
+				walking = walking.right;
+			} else {
+				parent = walking;
+				walking = walking.left;
+			}
+		}
+		return null;
+	}
+
 
 }
