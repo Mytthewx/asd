@@ -1,9 +1,6 @@
 package eu.mytthew;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Objects;
 
@@ -11,10 +8,11 @@ import java.util.Objects;
 public class BinarySearchTree<E extends Comparable<E>> {
 	private Node root;
 
+	@Data
 	@Getter
 	@Setter
 	@EqualsAndHashCode
-	protected class Node {
+	private class Node implements Comparable<Node> {
 		private E value;
 		private Node left;
 		private Node right;
@@ -27,6 +25,12 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		@Override
 		public String toString() {
 			return String.valueOf(value);
+		}
+
+
+		@Override
+		public int compareTo(Node node) {
+			return value.compareTo(node.value);
 		}
 	}
 
@@ -91,10 +95,39 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		if (root == null) {
 			return false;
 		}
-		if (Objects.equals(root.value, value)) {
-			Node right = root.right;
-			root = root.left;
-			root.right = right;
+		if (root.value.equals(value)) {
+			if (root.value.equals(value)) {
+				if (root.right == null && root.left == null) {
+					root = null;
+					return true;
+				}
+				if (root.right == null) {
+					root = root.left;
+					return true;
+				}
+				if (root.left == null) {
+					Node min = removeMin(root.right);
+					if (min == null) {
+						root = root.right;
+					} else {
+						root = min;
+					}
+					return true;
+				} else {
+					Node min = removeMin(root.right);
+					Node left = root.left;
+					Node right = root.right;
+					if (min == null) {
+						root = root.right;
+						root.left = left;
+					} else {
+						root = min;
+						root.left = left;
+						root.right = right;
+					}
+					return true;
+				}
+			}
 		}
 		Node walking = root;
 		while (walking != null) {
@@ -115,20 +148,20 @@ public class BinarySearchTree<E extends Comparable<E>> {
 						walking.right = min;
 					}
 					return true;
-				} else {
-					Node min = removeMin(walking.right.right);
-					Node left = walking.right.left;
-					Node right = walking.right.right;
-					if (min == null) {
-						walking.right = walking.right.right;
-						walking.right.left = left;
-					} else {
-						walking.right = min;
-						walking.right.left = left;
-						walking.right.right = right;
-					}
-					return true;
 				}
+				Node min = removeMin(walking.right.right);
+				Node left = walking.right.left;
+				Node right = walking.right.right;
+				if (min == null) {
+					walking.right = walking.right.right;
+					walking.right.left = left;
+				} else {
+					walking.right = min;
+					walking.right.left = left;
+					walking.right.right = right;
+				}
+				return true;
+
 			}
 			if (walking.left != null && Objects.equals(walking.left.value, value)) {
 				if (walking.left.right == null && walking.left.left == null) {
@@ -162,16 +195,18 @@ public class BinarySearchTree<E extends Comparable<E>> {
 					return true;
 				}
 			}
-			if (walking.value != null && walking.value.compareTo(value) < 0) {
-				walking = walking.right;
-			} else {
-				walking = walking.left;
+			if (walking.value != null) {
+				if (walking.value.compareTo(value) < 0) {
+					walking = walking.right;
+				} else {
+					walking = walking.left;
+				}
 			}
 		}
 		return false;
 	}
 
-	public Node removeMax(Node node) {
+	private Node removeMax(Node node) {
 		Node walking = root;
 		Node maxValue;
 		while (walking != null) {
@@ -189,7 +224,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 	}
 
 
-	public Node removeMin(Node node) {
+	private Node removeMin(Node node) {
 		Node walking = root;
 		Node minValue = null;
 		Node parent = walking;
@@ -219,6 +254,4 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		}
 		return null;
 	}
-
-
 }
