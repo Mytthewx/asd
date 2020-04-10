@@ -42,36 +42,45 @@ public class Heap<E extends Comparable<E>> {
 		}
 	}
 
-	public E get(int value) {
-		Node node = tree.get(value);
-		return node.value;
+	public E get() {
+		E root = tree.get(0).value;
+		int indexOfLast = tree.size() - 1;
+		tree.set(0, tree.get(indexOfLast));
+		tree.remove(indexOfLast);
+		downHeap();
+		return root;
 	}
 
-	public void upHeap() {
+	private void upHeap() {
 		int indexOfNode = tree.size() - 1;
 		int parent = (indexOfNode - 1) / 2;
-		System.out.println(tree);
-		while (tree.get(indexOfNode).value.compareTo(tree.get(parent).value) < 0 && indexOfNode > 0) {
+		while ((tree.get(parent).value).compareTo(tree.get(indexOfNode).value) > 0 && indexOfNode > 0) {
 			Node temp = tree.get(indexOfNode);
 			tree.set(indexOfNode, tree.get(parent));
 			tree.set(parent, temp);
 			indexOfNode = parent;
 			parent = (indexOfNode - 1) / 2;
 		}
-		System.out.println(tree);
 	}
 
-//	public void downHeap() {
-//		int indexOfNode = tree.size() - 1;
-//		int parent = (indexOfNode - 1) / 2;
-//		while (tree.get(indexOfNode).compareTo(tree.get(parent)) > 0 && indexOfNode > 0) {
-//			Node temp = tree.get(indexOfNode);
-//			tree.set(indexOfNode, tree.get(parent));
-//			tree.set(parent, temp);
-//			indexOfNode = parent;
-//			parent = (indexOfNode - 1) / 2;
-//		}
-//}
+	private void downHeap() {
+		int parent = 0;
+		int smallerChild = getSmaller(parent);
+		if (tree.get(parent).value.compareTo(tree.get(smallerChild).value) > 0 && smallerChild > 0) {
+			Node temp = tree.get(parent);
+			tree.set(parent, tree.get(smallerChild));
+			tree.set(smallerChild, temp);
+		}
+	}
+
+	private int getSmaller(int index) {
+		int leftChild = (2 * index) + 1;
+		int rightChild = (2 * index) + 2;
+		if (tree.get(leftChild).compareTo(tree.get(rightChild)) < 0) {
+			return leftChild;
+		}
+		return rightChild;
+	}
 
 	public void display() {
 		int target = 1;
