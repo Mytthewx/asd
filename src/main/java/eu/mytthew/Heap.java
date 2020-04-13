@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.NoSuchElementException;
 
 public class Heap<E extends Comparable<E>> {
 	List<Node> tree = new ArrayList<>();
@@ -17,9 +17,9 @@ public class Heap<E extends Comparable<E>> {
 	@Setter
 	@EqualsAndHashCode
 	private class Node implements Comparable<Node> {
-		final E value;
+		private final E value;
 
-		public Node(E value) {
+		private Node(E value) {
 			this.value = value;
 		}
 
@@ -47,8 +47,20 @@ public class Heap<E extends Comparable<E>> {
 		int indexOfLast = tree.size() - 1;
 		tree.set(0, tree.get(indexOfLast));
 		tree.remove(indexOfLast);
-		downHeap();
+		if (tree.size() == 0) {
+			throw new NoSuchElementException("Size is 0.");
+		} else if (tree.size() == 2) {
+			tree.set(0, tree.get(1));
+		} else if (tree.size() == 1) {
+			tree.remove(0);
+		} else {
+			downHeap();
+		}
 		return root;
+	}
+
+	public int size() {
+		return tree.size();
 	}
 
 	private void upHeap() {
@@ -93,5 +105,6 @@ public class Heap<E extends Comparable<E>> {
 			}
 			System.out.print(n);
 		}
+		System.out.println();
 	}
 }
