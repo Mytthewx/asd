@@ -30,7 +30,7 @@ public class Heap<E extends Comparable<E>> {
 
 		@Override
 		public int compareTo(Node node) {
-			return 0;
+			return value.compareTo(node.value);
 		}
 	}
 
@@ -43,30 +43,32 @@ public class Heap<E extends Comparable<E>> {
 	}
 
 	public E get() {
-		E root = tree.get(0).value;
-		int indexOfLast = tree.size() - 1;
-		tree.set(0, tree.get(indexOfLast));
-		tree.remove(indexOfLast);
-		if (tree.size() == 0) {
+		if (tree.isEmpty()) {
 			throw new NoSuchElementException("Size is 0.");
-		} else if (tree.size() == 2) {
-			tree.set(0, tree.get(1));
-		} else if (tree.size() == 1) {
-			tree.remove(0);
-		} else {
-			downHeap();
 		}
-		return root;
+		Node root = tree.get(0);
+		if (tree.size() == 1) {
+			tree.remove(0);
+			return root.value;
+		}
+		tree.set(0, tree.get(tree.size() - 1));
+		tree.remove(tree.size() - 1);
+		downHeap();
+		return root.value;
 	}
 
 	public int size() {
 		return tree.size();
 	}
 
+	private boolean hasAnyChild(int index) {
+		return tree.size() > (2 * index) + 1;
+	}
+
 	private void upHeap() {
 		int indexOfNode = tree.size() - 1;
 		int parent = (indexOfNode - 1) / 2;
-		while ((tree.get(parent).value).compareTo(tree.get(indexOfNode).value) > 0 && indexOfNode > 0) {
+		while ((tree.get(parent)).compareTo(tree.get(indexOfNode)) > 0 && indexOfNode > 0) {
 			Node temp = tree.get(indexOfNode);
 			tree.set(indexOfNode, tree.get(parent));
 			tree.set(parent, temp);
@@ -78,17 +80,19 @@ public class Heap<E extends Comparable<E>> {
 	private void downHeap() {
 		int parent = 0;
 		int smallerChild = getSmaller(parent);
-		if (tree.get(parent).value.compareTo(tree.get(smallerChild).value) > 0 && smallerChild > 0) {
+		while (hasAnyChild(parent) && tree.get(parent).compareTo(tree.get(smallerChild)) > 0) {
 			Node temp = tree.get(parent);
 			tree.set(parent, tree.get(smallerChild));
 			tree.set(smallerChild, temp);
+			parent = smallerChild;
+			smallerChild = getSmaller(parent);
 		}
 	}
 
 	private int getSmaller(int index) {
 		int leftChild = (2 * index) + 1;
 		int rightChild = (2 * index) + 2;
-		if (tree.get(leftChild).compareTo(tree.get(rightChild)) < 0) {
+		if (rightChild >= tree.size() || tree.get(rightChild).compareTo(tree.get(leftChild)) > 0) {
 			return leftChild;
 		}
 		return rightChild;

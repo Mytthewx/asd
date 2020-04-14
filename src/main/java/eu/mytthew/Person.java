@@ -1,8 +1,8 @@
 package eu.mytthew;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class Person implements Comparable<Person> {
 	String name;
 	int age;
@@ -26,9 +26,8 @@ public class Person implements Comparable<Person> {
 		this.age = age;
 	}
 
-
 	@Override
-	public int compareTo(Person o) {
-		return 0;
+	public int compareTo(Person person) {
+		return age - person.age;
 	}
 }
