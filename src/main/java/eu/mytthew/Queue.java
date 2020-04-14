@@ -1,5 +1,6 @@
 package eu.mytthew;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ public class Queue<E> {
 	private Node last;
 	private int counter;
 
+	@Data
 	@Getter
 	@Setter
 	@EqualsAndHashCode
@@ -28,22 +30,22 @@ public class Queue<E> {
 	public E get() {
 		Node walking = last;
 		counter--;
-		if (walking.getPrev() == null) {
-			E flag = walking.getValue();
-			walking.setValue(null);
+		if (walking.prev == null) {
+			E flag = walking.value;
+			walking.value = null;
 			return flag;
 		}
-		while (walking.getPrev().getPrev() != null) {
-			walking = walking.getPrev();
+		while (walking.prev.prev != null) {
+			walking = walking.prev;
 		}
-		E flag = walking.getPrev().getValue();
-		walking.setPrev(null);
+		E flag = walking.prev.value;
+		walking.prev = null;
 		return flag;
 	}
 
 	public void add(E value) {
 		Node node = new Node(value);
-		node.setPrev(last);
+		node.prev = last;
 		last = node;
 		counter++;
 	}
@@ -70,8 +72,8 @@ public class Queue<E> {
 			if (!walking.equals(walking2)) {
 				return false;
 			}
-			walking = walking.getPrev();
-			walking2 = walking2.getPrev();
+			walking = walking.prev;
+			walking2 = walking2.prev;
 		}
 		return true;
 	}
@@ -83,7 +85,7 @@ public class Queue<E> {
 		int result = 1;
 		while (walking != null) {
 			result = prime * result + (walking.hashCode());
-			walking = walking.getPrev();
+			walking = walking.prev;
 		}
 		return result;
 	}
@@ -94,16 +96,16 @@ public class Queue<E> {
 			return false;
 		}
 		do {
-			if (walking.getValue() == value) {
+			if (walking.value == value) {
 				return true;
 			}
-			if (walking.getValue() == null) {
+			if (walking.value == null) {
 				return false;
 			}
-			if (walking.getValue().equals(value)) {
+			if (walking.value.equals(value)) {
 				return true;
 			}
-			walking = walking.getPrev();
+			walking = walking.prev;
 		} while (walking != null);
 		return false;
 	}

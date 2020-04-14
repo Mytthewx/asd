@@ -4,10 +4,7 @@ import org.junit.Test;
 
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ListTest {
 	@Test
@@ -703,7 +700,7 @@ public class ListTest {
 		String result = list.toString();
 
 		// then
-		assertEquals("Person(name=Mateusz)", result);
+		assertEquals("Person(name=Mateusz, age=0)", result);
 	}
 
 	@Test
@@ -716,7 +713,7 @@ public class ListTest {
 		list.add(person);
 
 		// then
-		assertEquals("Person(name=Maciej)", list.toString());
+		assertEquals("Person(name=Maciej, age=0)", list.toString());
 		assertEquals(person, list.get(0));
 		assertEquals(1, list.size());
 	}

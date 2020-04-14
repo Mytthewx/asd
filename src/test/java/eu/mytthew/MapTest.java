@@ -5,10 +5,7 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MapTest {
 	@Test
@@ -479,6 +476,6 @@ public class MapTest {
 		String result = map.toString();
 
 		// then
-		assertEquals("Map.Node(prev=null, entry=Map.Entry(key=Person(name=Mateusz), value=23))", result);
+		assertEquals("Map.Node(prev=null, entry=Map.Entry(key=Person(name=Mateusz, age=0), value=23))", result);
 	}
 }

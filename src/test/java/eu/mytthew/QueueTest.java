@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class QueueTest {
 	@Test
@@ -378,7 +376,7 @@ public class QueueTest {
 		String result = queue.toString();
 
 		// then
-		assertEquals("Person(name=Mateusz)", result);
+		assertEquals("Person(name=Mateusz, age=0)", result);
 	}
 
 	@Test
@@ -391,7 +389,7 @@ public class QueueTest {
 		queue.add(person);
 
 		// then
-		assertEquals("Person(name=Maciej)", queue.toString());
+		assertEquals("Person(name=Maciej, age=0)", queue.toString());
 		assertEquals(1, queue.size());
 		assertEquals(person, queue.get());
 		assertEquals(0, queue.size());

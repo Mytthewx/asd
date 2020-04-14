@@ -5,10 +5,7 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StackTest {
 	@Test
@@ -391,9 +388,9 @@ public class StackTest {
 	public void hashCodeTest() {
 		// given
 		HashSet<Stack<Person>> hashSet = new HashSet<>();
-		Stack<Person> stack1 = new Stack();
-		Stack<Person> stack2 = new Stack();
-		Stack<Person> stack3 = new Stack();
+		Stack<Person> stack1 = new Stack<>();
+		Stack<Person> stack2 = new Stack<>();
+		Stack<Person> stack3 = new Stack<>();
 		stack1.put(new Person("Maciej"));
 		stack2.put(new Person("Dariusz"));
 		stack3.put(new Person("Pawel"));
@@ -418,7 +415,7 @@ public class StackTest {
 		String result = stack.toString();
 
 		// then
-		assertEquals("Person(name=Mateusz)", result);
+		assertEquals("Person(name=Mateusz, age=0)", result);
 	}
 
 	@Test
@@ -431,7 +428,7 @@ public class StackTest {
 		stack.put(person);
 
 		// then
-		assertEquals("Person(name=Maciej)", stack.toString());
+		assertEquals("Person(name=Maciej, age=0)", stack.toString());
 		assertEquals(person, stack.pop());
 		assertEquals(0, stack.size());
 	}
