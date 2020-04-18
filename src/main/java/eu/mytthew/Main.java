@@ -1,15 +1,13 @@
 package eu.mytthew;
 
-import java.util.Random;
+import java.util.Arrays;
 
 public class Main {
 	public static void main(String[] args) {
-		Heap<Person> heap = new Heap<>();
-		new Random().ints(1000, 0, 100).mapToObj(Person::new).forEach(heap::add);
-		int i = 1;
-		while (heap.size() > 0) {
-			System.out.println(i + ": " + heap.get());
-			i++;
-		}
+		MergeSort mergeSort = new MergeSort();
+		int[] array = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+		System.out.println("Original array: " + Arrays.toString(array));
+		mergeSort.mergeSort(array);
+		System.out.println("New array: " + Arrays.toString(array));
 	}
 }
