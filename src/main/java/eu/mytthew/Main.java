@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 public class Main {
 	public static void main(String[] args) {
-		CountingSort countingSort = new CountingSort();
-		int[] array = {3, 2, 1, 3, 2, 10};
+		RadixSort radixSort = new RadixSort();
+		int[] array = {923, 625, 1, 364, 723, 662, 98};
 		System.out.println(Arrays.toString(array));
-		countingSort.countingSort(array);
-		System.out.println(Arrays.toString(array));
+		radixSort.radixSort(array);
 	}
 }
