@@ -7,6 +7,6 @@ public class Main {
 		BinarySearch binarySearch = new BinarySearch();
 		int[] array = {1, 1, 2, 2, 4, 5, 7, 8};
 		System.out.println(Arrays.toString(array));
-		System.out.println("Exist: " + binarySearch.binarySearch(array, 5));
+		System.out.println("Exist: " + binarySearch.binarySearch(array, 3));
 	}
 }

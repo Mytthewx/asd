@@ -5,16 +5,17 @@ public class BinarySearch {
 		return binarySearch(array, 0, array.length - 1, value);
 	}
 
-	public boolean binarySearch(int[] array, int min, int max, int value) {
-		while (min <= max) {
-			int middle = min + (max - min) / 2;
-			if (array[middle] == value) {
+	public boolean binarySearch(int[] array, int low, int high, int value) {
+		while (low <= high) {
+			int mid = (low + high);
+			int midValue = array[mid];
+			if (midValue == value) {
 				return true;
 			}
-			if (array[middle] > value) {
-				return binarySearch(array, min, middle - 1, value);
+			if (midValue > value) {
+				high = mid - 1;
 			} else {
-				return binarySearch(array, middle + 1, array.length - 1, value);
+				low = mid + 1;
 			}
 		}
 		return false;
