@@ -1,14 +1,12 @@
 package eu.mytthew;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class Main {
 	public static void main(String[] args) {
-		QuickSort quickSort = new QuickSort();
-		int[] array = new Random().ints(100, 1, 10).toArray();
+		BinarySearch binarySearch = new BinarySearch();
+		int[] array = {1, 1, 2, 2, 4, 5, 7, 8};
 		System.out.println(Arrays.toString(array));
-		quickSort.quickSort(array);
-		System.out.println(Arrays.toString(array));
+		System.out.println("Exist: " + binarySearch.binarySearch(array, 5));
 	}
 }
